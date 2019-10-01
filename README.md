@@ -1,0 +1,2 @@
+- `npm start` or `yarn start` to start project
+- `react-native run-android` or `react-native run-ios` to run emulator

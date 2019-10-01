@@ -85,13 +85,14 @@ const styles = StyleSheet.create({
     paddingLeft: 0,
     fontSize: 14,
     paddingBottom: 10.5,
+    marginBottom: 20,
   },
 
   loginButtonContainer: {
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 45.5,
+    marginTop: 25.5,
   },
 
   loginButton: {

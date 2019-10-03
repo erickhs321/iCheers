@@ -42,10 +42,8 @@ export default class Login extends React.Component {
         />
 
         <View style={styles.loginButtonContainer}>
-          <TouchableOpacity style={styles.loginButton}>
-            <Text style={styles.buttonText} onPress={this.login}>
-              Entrar
-            </Text>
+          <TouchableOpacity style={styles.loginButton} onPress={this.login}>
+            <Text style={styles.buttonText}>Entrar</Text>
           </TouchableOpacity>
           <Text style={styles.textOrLoginWith}> ou entrar com:</Text>
           <TouchableOpacity onPress={this.login}>

@@ -8,13 +8,24 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import AsyncStorage from '@react-native-community/async-storage';
+
 export default class Login extends React.Component {
   static navigationOptions = {
     drawerLabel: 'Login',
   };
 
-  login = () => {
-    this.props.navigation.navigate('drawerNavigator');
+  state = {
+    user: '',
+    password: '',
+  };
+
+  login = async () => {
+    await AsyncStorage.setItem('token', '32424234');
+
+    // this.props.navigation.navigate('drawerNavigator');
+    const teste = await AsyncStorage.getAllKeys();
+    console.log(teste);
   };
 
   register = () => {
@@ -31,12 +42,16 @@ export default class Login extends React.Component {
 
         <TextInput
           style={styles.input}
+          onChangeText={user => this.setState({ user })}
+          value={this.state.user}
           placeholder="Login"
           placeholderTextColor="#363740"
         />
         <TextInput
           style={styles.input}
           placeholder="Senha"
+          onChangeText={password => this.setState({ password })}
+          value={this.state.password}
           placeholderTextColor="#363740"
           secureTextEntry={true}
         />

@@ -8,17 +8,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-export default class Login extends React.Component {
+export default class Register extends React.Component {
   static navigationOptions = {
-    drawerLabel: 'Login',
-  };
-
-  login = () => {
-    this.props.navigation.navigate('drawerNavigator');
-  };
-
-  register = () => {
-    this.props.navigation.navigate('Register');
+    drawerLabel: 'Register',
   };
 
   render() {
@@ -26,7 +18,7 @@ export default class Login extends React.Component {
       <View style={styles.container}>
         <View style={styles.logoContainer}>
           <Image source={require('../../assets/logo.png')} />
-          <Text style={styles.title}>iCheers</Text>
+          <Text style={styles.title}>Cadastro</Text>
         </View>
 
         <TextInput
@@ -36,32 +28,17 @@ export default class Login extends React.Component {
         />
         <TextInput
           style={styles.input}
-          placeholder="Senha"
+          placeholder="Login"
           placeholderTextColor="#363740"
-          secureTextEntry={true}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Login"
+          placeholderTextColor="#363740"
         />
 
-        <View style={styles.loginButtonContainer}>
-          <TouchableOpacity style={styles.loginButton}>
-            <Text style={styles.buttonText} onPress={this.login}>
-              Entrar
-            </Text>
-          </TouchableOpacity>
-          <Text style={styles.textOrLoginWith}> ou entrar com:</Text>
-          <TouchableOpacity onPress={this.login}>
-            <Image source={require('../../assets/google.png')} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.login} style={styles.facebookButton}>
-            <Image source={require('../../assets/facebook.png')} />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.forgotPasswordContainer}>
-          <TouchableOpacity>
-            <Text style={styles.forgotPasswordText}>Esqueci minha senha</Text>
-          </TouchableOpacity>
-        </View>
-        <TouchableOpacity style={styles.registerButton} onPress={this.register}>
-          <Text style={styles.buttonText}>Não possuo um cadastro</Text>
+        <TouchableOpacity style={styles.loginButton}>
+          <Text style={styles.buttonText}>Cadastrar</Text>
         </TouchableOpacity>
       </View>
     );

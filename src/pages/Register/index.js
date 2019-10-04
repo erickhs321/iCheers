@@ -18,22 +18,35 @@ export default class Register extends React.Component {
       <View style={styles.container}>
         <View style={styles.logoContainer}>
           <Image source={require('../../assets/logo.png')} />
-          <Text style={styles.title}>Cadastro</Text>
+          <Text style={styles.title}>iCheers</Text>
         </View>
 
         <TextInput
           style={styles.input}
-          placeholder="Login"
+          placeholder="Email"
           placeholderTextColor="#363740"
         />
         <TextInput
           style={styles.input}
-          placeholder="Login"
+          placeholder="Senha"
           placeholderTextColor="#363740"
         />
+
         <TextInput
           style={styles.input}
-          placeholder="Login"
+          placeholder="Endereço"
+          placeholderTextColor="#363740"
+        />
+
+        <TextInput
+          style={styles.input}
+          placeholder="Altura"
+          placeholderTextColor="#363740"
+        />
+
+        <TextInput
+          style={styles.input}
+          placeholder="Peso"
           placeholderTextColor="#363740"
         />
 

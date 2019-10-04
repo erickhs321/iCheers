@@ -7,7 +7,7 @@ export default class Configuration extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Configuração',
     tabBarIcon: ({ tintColor }) => (
-      <FontAwesomeIcon size={22} icon={faUserCog} color={tintColor} />
+      <FontAwesomeIcon size={20} icon={faUserCog} color={tintColor} />
     ),
   };
 

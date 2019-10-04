@@ -7,7 +7,7 @@ export default class Home extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Início',
     tabBarIcon: ({ tintColor }) => (
-      <FontAwesomeIcon size={24} icon={faHome} color={tintColor} />
+      <FontAwesomeIcon size={22} icon={faHome} color={tintColor} />
     ),
   };
 

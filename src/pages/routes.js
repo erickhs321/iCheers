@@ -6,6 +6,7 @@ import SplashScreen from './SplashScreen';
 import Exams from './Exams';
 import MedicalRecord from './MedicalRecord';
 import Configuration from './Configuration';
+import Partners from './Partners';
 
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
@@ -21,6 +22,7 @@ const tabsNavigator = createBottomTabNavigator(
     Home,
     Exams,
     MedicalRecord,
+    Partners,
     Configuration,
   },
   {

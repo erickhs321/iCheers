@@ -7,7 +7,7 @@ export default class MedicalRecord extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Prontuário',
     tabBarIcon: ({ tintColor }) => (
-      <FontAwesomeIcon size={22} icon={faNotesMedical} color={tintColor} />
+      <FontAwesomeIcon size={20} icon={faNotesMedical} color={tintColor} />
     ),
   };
 

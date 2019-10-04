@@ -9,7 +9,7 @@ import Register from './Register';
 import SplashScreen from './SplashScreen';
 
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
 
 const stackNavigation = createStackNavigator({
@@ -17,14 +17,16 @@ const stackNavigation = createStackNavigator({
   Register,
 });
 
-const drawerNavigator = createDrawerNavigator({
+const tabsNavigator = createBottomTabNavigator({
   Home,
+  Register,
+  Login,
 });
 
 const switchNavigator = createSwitchNavigator(
   {
     stackNavigation,
-    drawerNavigator,
+    tabsNavigator,
     SplashScreen,
   },
   {

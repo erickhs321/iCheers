@@ -5,13 +5,16 @@ import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 export default class Home extends React.Component {
   static navigationOptions = {
-    drawerLabel: 'Home',
-    drawerIcon: () => <FontAwesomeIcon icon={faHome} />,
+    tabBarLabel: 'Início',
+    tabBarIcon: ({ tintColor }) => (
+      <FontAwesomeIcon size={22} icon={faHome} color={tintColor} />
+    ),
   };
 
   logout = () => {
     this.props.navigation.navigate('Login');
   };
+
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>

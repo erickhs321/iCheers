@@ -11,10 +11,16 @@ export default class Configuration extends React.Component {
     ),
   };
 
+  logout = () => {
+    this.props.navigation.navigate('Login');
+  };
+
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Configuration</Text>
+        <TouchableOpacity onPress={this.logout}>
+          <Text>Logout</Text>
+        </TouchableOpacity>
       </View>
     );
   }

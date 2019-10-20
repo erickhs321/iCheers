@@ -8,7 +8,7 @@ import {
   Image,
 } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faUserCog } from '@fortawesome/free-solid-svg-icons';
+import { faUserCog, faPlus } from '@fortawesome/free-solid-svg-icons';
 import ImagePicker from 'react-native-image-picker';
 
 const options = {
@@ -25,6 +25,7 @@ export default class Configuration extends React.Component {
     weight: '',
     dateOfBirth: '',
     bloodType: 'O+',
+    diseases: ['rubeola', 'diabetes'],
   };
 
   static navigationOptions = {
@@ -107,6 +108,17 @@ export default class Configuration extends React.Component {
           onChangeText={bloodType => this.setState({ bloodType })}
           style={styles.input}
         />
+        <View style={styles.title}>
+          <Text>Doenças</Text>
+          <TouchableOpacity>
+            <FontAwesomeIcon
+              style={styles.plus}
+              size={18}
+              icon={faPlus}
+              color={'#01D300'}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -123,6 +135,8 @@ const styles = StyleSheet.create({
     marginBottom: -15,
     color: 'rgba(51, 51, 51, 0.7)',
     fontSize: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   input: {
     width: '100%',
@@ -132,5 +146,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     paddingBottom: 0,
     marginBottom: 20,
+  },
+  plus: {
+    marginLeft: 4,
   },
 });

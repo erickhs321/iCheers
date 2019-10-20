@@ -16,14 +16,25 @@ export default class Home extends React.Component {
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         
           <View style={styles.box}>
-            <Text style={styles.text1}> Pergunta </Text>
+            <Text style={styles.text1}> Pergunta  X/5</Text>
             <Text style={styles.text2}>Texto da pergunda Desejada, qualquer Pergunta?</Text>
             <View style={styles.icons}>
-            <Image style={styles.iconsize} source={require('../../assets/qsad.png')}></Image>
-            <Image style={styles.iconsize} source={require('../../assets/qsad1.png')}></Image>
-            <Image style={styles.iconsize} source={require('../../assets/qnormal.png')}></Image>
-            <Image style={styles.iconsize} source={require('../../assets/qhappy.png')}></Image>
-            <Image style={styles.iconsize} source={require('../../assets/qhappy1.png')}></Image>
+              <TouchableOpacity>  
+                <Image style={styles.iconsize} source={require('../../assets/qsad.png')}></Image>
+              </TouchableOpacity>
+              <TouchableOpacity>  
+                <Image style={styles.iconsize} source={require('../../assets/qsad1.png')}></Image>
+              </TouchableOpacity>  
+              <TouchableOpacity>  
+                <Image style={styles.iconsize} source={require('../../assets/qnormal.png')}></Image>
+              </TouchableOpacity>  
+              <TouchableOpacity>  
+                <Image style={styles.iconsize} source={require('../../assets/qhappy.png')}></Image>
+              </TouchableOpacity>  
+              <TouchableOpacity>  
+                <Image style={styles.iconsize} source={require('../../assets/qhappy1.png')}></Image>
+              </TouchableOpacity>  
+              
             </View>
             <TouchableOpacity style={styles.proxima}>
               <Text style={styles.text3}> Pular </Text>

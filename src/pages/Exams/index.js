@@ -1,7 +1,19 @@
 import React from 'react';
-import { Image, View, Text, Button } from 'react-native';
+import {
+  StyleSheet,
+  Image,
+  View,
+  Text,
+  Button,
+  TouchableOpacity,
+} from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faFileMedicalAlt } from '@fortawesome/free-solid-svg-icons';
+import {
+  faFileMedicalAlt,
+  faFilter,
+  faPlus,
+  faEye,
+} from '@fortawesome/free-solid-svg-icons';
 import ImagePicker from 'react-native-image-picker';
 import Ocr from 'react-native-tesseract-ocr';
 
@@ -61,14 +73,40 @@ export default class Exams extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={styles.container}>
+        <View style={styles.containerButton}>
+          <TouchableOpacity style={styles.button}>
+            <FontAwesomeIcon size={20} icon={faFilter} />
+            <Text>Filtrar busca</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.choosePhoto} style={styles.button}>
+            <FontAwesomeIcon size={20} icon={faPlus} />
+            <Text>Cadastrar exame</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <FontAwesomeIcon size={20} icon={faEye} />
+            <Text>Ver cartão de vacina</Text>
+          </TouchableOpacity>
+        </View>
+
         <Image
           source={this.state.avatarSource}
           style={{ width: 200, height: 200, margin: 10, padding: 10 }}
         />
-        <Button title="Selecione o exame" onPress={this.choosePhoto} />
         <Text style>{this.state.text}</Text>
       </View>
     );
   }
 }
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 31,
+    alignItems: 'center',
+  },
+  containerButton: {
+    flexDirection: 'row',
+  },
+  button: {
+    flexDirection: 'row',
+  },
+});

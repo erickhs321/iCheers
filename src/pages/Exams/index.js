@@ -1,5 +1,12 @@
 import React from 'react';
-import { StyleSheet, Image, View, Text, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  Image,
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
   faFileMedicalAlt,
@@ -82,65 +89,67 @@ export default class Exams extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.containerButton}>
-          <TouchableOpacity style={styles.button}>
-            <FontAwesomeIcon size={20} icon={faFilter} />
-            <Text>Filtrar busca</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.choosePhoto} style={styles.button}>
-            <FontAwesomeIcon size={20} icon={faPlus} />
-            <Text>Cadastrar exame</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <FontAwesomeIcon size={20} icon={faEye} />
-            <Text>Ver cartão de vacina</Text>
-          </TouchableOpacity>
+      <ScrollView>
+        <View style={styles.container}>
+          <View style={styles.containerButton}>
+            <TouchableOpacity style={styles.button}>
+              <FontAwesomeIcon size={20} icon={faFilter} />
+              <Text>Filtrar busca</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.choosePhoto} style={styles.button}>
+              <FontAwesomeIcon size={20} icon={faPlus} />
+              <Text>Cadastrar exame</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button}>
+              <FontAwesomeIcon size={20} icon={faEye} />
+              <Text>Ver cartão de vacina</Text>
+            </TouchableOpacity>
+          </View>
+          <DataTable>
+            <DataTable.Header style={styles.borderBottomRow}>
+              <DataTable.Title>
+                <Text style={styles.titleStyle}>Nome</Text>
+              </DataTable.Title>
+              <DataTable.Title style={{ flex: 0.7 }}>
+                <Text style={styles.titleStyle}>Local</Text>
+              </DataTable.Title>
+              <DataTable.Title style={{ flex: 0.45 }}>
+                <Text style={styles.titleStyle}>Data</Text>
+              </DataTable.Title>
+            </DataTable.Header>
+
+            {this.state.exams.map(exam => {
+              return (
+                <DataTable.Row style={styles.borderBottomRow} key={exam.id}>
+                  <DataTable.Cell>
+                    <Text style={styles.tableTextSize}>{exam.name}</Text>
+                  </DataTable.Cell>
+                  <DataTable.Cell>
+                    <Text style={styles.tableTextSize}>{exam.place}</Text>
+                  </DataTable.Cell>
+
+                  <Text style={styles.tableTextSize}>
+                    {exam.date}
+                    {'    '}
+                  </Text>
+
+                  <Text style={styles.tableTextSize}>
+                    <TouchableOpacity style={styles.viewButton}>
+                      <FontAwesomeIcon size={14} icon={faEye} color={'#fff'} />
+                    </TouchableOpacity>
+                  </Text>
+                </DataTable.Row>
+              );
+            })}
+          </DataTable>
+
+          <Image
+            source={this.state.avatarSource}
+            style={{ width: 200, height: 200, margin: 10, padding: 10 }}
+          />
+          <Text style>{this.state.text}</Text>
         </View>
-        <DataTable>
-          <DataTable.Header style={styles.borderBottomRow}>
-            <DataTable.Title>
-              <Text style={styles.titleStyle}>Nome</Text>
-            </DataTable.Title>
-            <DataTable.Title style={{ flex: 0.7 }}>
-              <Text style={styles.titleStyle}>Local</Text>
-            </DataTable.Title>
-            <DataTable.Title style={{ flex: 0.45 }}>
-              <Text style={styles.titleStyle}>Data</Text>
-            </DataTable.Title>
-          </DataTable.Header>
-
-          {this.state.exams.map(exam => {
-            return (
-              <DataTable.Row style={styles.borderBottomRow} key={exam.id}>
-                <DataTable.Cell>
-                  <Text style={styles.tableTextSize}>{exam.name}</Text>
-                </DataTable.Cell>
-                <DataTable.Cell>
-                  <Text style={styles.tableTextSize}>{exam.place}</Text>
-                </DataTable.Cell>
-
-                <Text style={styles.tableTextSize}>
-                  {exam.date}
-                  {'    '}
-                </Text>
-
-                <Text style={styles.tableTextSize}>
-                  <TouchableOpacity style={styles.viewButton}>
-                    <FontAwesomeIcon size={14} icon={faEye} color={'#fff'} />
-                  </TouchableOpacity>
-                </Text>
-              </DataTable.Row>
-            );
-          })}
-        </DataTable>
-
-        <Image
-          source={this.state.avatarSource}
-          style={{ width: 200, height: 200, margin: 10, padding: 10 }}
-        />
-        <Text style>{this.state.text}</Text>
-      </View>
+      </ScrollView>
     );
   }
 }

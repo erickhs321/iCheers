@@ -40,6 +40,8 @@ target 'iCheers' do
 
   pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'iCheersTests' do
     inherit! :search_paths
     # Pods for testing

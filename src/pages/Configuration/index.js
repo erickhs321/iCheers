@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  Picker,
 } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
@@ -33,6 +34,8 @@ export default class Configuration extends React.Component {
     diseases: ['Rubeola', 'Diabetes'],
     profiles: ['Carla', 'Maria'],
     devices: ['Lenovo k6'],
+    frequency: '',
+    encryptionKey: 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
   };
 
   static navigationOptions = {
@@ -71,7 +74,7 @@ export default class Configuration extends React.Component {
         <View style={styles.container}>
           <Image
             source={this.state.avatarSource}
-            style={{ width: 92, height: 94, borderRadius: 100 }}
+            style={{ width: 92, height: 94, borderRadius: 100, backgroundColor: 'grey' }}
           />
           <TouchableOpacity onPress={this.choosePhoto}>
             <Text>Alterar</Text>
@@ -131,7 +134,9 @@ export default class Configuration extends React.Component {
             {this.state.diseases.map((disease, index) => {
               return (
                 <View style={styles.listItem}>
-                  <Text key={index}>- {disease}</Text>
+                  <Text key={index} style={styles.listText}>
+                    - {disease}
+                  </Text>
                   <FontAwesomeIcon
                     style={styles.iconMargin}
                     size={12}
@@ -157,7 +162,9 @@ export default class Configuration extends React.Component {
             {this.state.profiles.map((profile, index) => {
               return (
                 <View style={styles.listItem}>
-                  <Text key={index}>- {profile}</Text>
+                  <Text key={index} style={styles.listText}>
+                    - {profile}
+                  </Text>
                   <FontAwesomeIcon
                     style={styles.iconMargin}
                     size={12}
@@ -183,7 +190,9 @@ export default class Configuration extends React.Component {
             {this.state.devices.map((device, index) => {
               return (
                 <View style={styles.listItem}>
-                  <Text key={index}>- {device}</Text>
+                  <Text key={index} style={styles.listText}>
+                    - {device}
+                  </Text>
                   <FontAwesomeIcon
                     style={styles.iconMargin}
                     size={12}
@@ -194,6 +203,25 @@ export default class Configuration extends React.Component {
               );
             })}
           </View>
+          <Text style={styles.title}>Frequência</Text>
+          <Picker
+            selectedValue={this.state.frequency}
+            style={styles.select}
+            onValueChange={(itemValue, itemIndex) =>
+              this.setState({ frequency: itemValue })
+            }>
+            <Picker.Item label="Todo Dia" value="everyday" />
+            <Picker.Item label="Uma vez por semana" value="onceAWeek" />
+          </Picker>
+          <Text style={styles.title}>Chave de criptografia</Text>
+          <TextInput
+            value={this.state.encryptionKey}
+            onChangeText={encryptionKey => this.setState({ encryptionKey })}
+            style={styles.input}
+          />
+          <TouchableOpacity style={styles.submitButton}>
+            <Text style={styles.textButton}>Salvar Configurações</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     );
@@ -219,7 +247,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#363740',
     borderBottomWidth: 1.1,
     paddingLeft: 0,
-    fontSize: 14,
+    fontSize: 12,
     paddingBottom: 0,
     marginBottom: 20,
   },
@@ -234,5 +262,26 @@ const styles = StyleSheet.create({
   listItem: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  listText: {
+    fontSize: 12,
+  },
+  select: {
+    fontSize: 10,
+    width: '100%',
+    marginLeft: -15,
+  },
+  submitButton: {
+    backgroundColor: '#363740',
+    borderRadius: 16,
+    height: 34,
+    width: 160,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textButton: {
+    fontSize: 13,
+    letterSpacing: 0.4,
+    color: '#F7F7F7',
   },
 });

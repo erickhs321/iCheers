@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHandshake } from '@fortawesome/free-solid-svg-icons';
 
@@ -35,45 +35,47 @@ export default class Configuration extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        {this.state.partners.map((item, index) => {
-          return (
-            <View style={styles.card} key={index}>
-              <View style={styles.header}>
-                <Image
-                  style={styles.image}
-                  source={{
-                    uri: item.image,
-                  }}
-                />
-                <Text style={styles.title}>{item.title}</Text>
-              </View>
-              <View style={{ marginBottom: 14 }}>
-                <Text style={styles.subtitle}>Endereço</Text>
-                <View>
-                  <View style={styles.field}>
-                    <Text style={styles.fieldName}>Rua:</Text>
-                    <Text style={styles.fieldValue}>{item.street}</Text>
-                  </View>
-                  <View style={styles.field}>
-                    <Text style={styles.fieldName}>Número:</Text>
-                    <Text style={styles.fieldValue}>{item.number}</Text>
-                  </View>
-                  <View style={styles.field}>
-                    <Text style={styles.fieldName}>Cidade:</Text>
-                    <Text style={styles.fieldValue}>{item.city}</Text>
+      <ScrollView>
+        <View style={styles.container}>
+          {this.state.partners.map((item, index) => {
+            return (
+              <View style={styles.card} key={index}>
+                <View style={styles.header}>
+                  <Image
+                    style={styles.image}
+                    source={{
+                      uri: item.image,
+                    }}
+                  />
+                  <Text style={styles.title}>{item.title}</Text>
+                </View>
+                <View style={{ marginBottom: 14 }}>
+                  <Text style={styles.subtitle}>Endereço</Text>
+                  <View>
+                    <View style={styles.field}>
+                      <Text style={styles.fieldName}>Rua:</Text>
+                      <Text style={styles.fieldValue}>{item.street}</Text>
+                    </View>
+                    <View style={styles.field}>
+                      <Text style={styles.fieldName}>Número:</Text>
+                      <Text style={styles.fieldValue}>{item.number}</Text>
+                    </View>
+                    <View style={styles.field}>
+                      <Text style={styles.fieldName}>Cidade:</Text>
+                      <Text style={styles.fieldValue}>{item.city}</Text>
+                    </View>
                   </View>
                 </View>
+                <Text style={styles.subtitle}>Contato</Text>
+                <View style={styles.field}>
+                  <Text style={styles.fieldName}>Telefone:</Text>
+                  <Text style={styles.fieldValue}>{item.phone}</Text>
+                </View>
               </View>
-              <Text style={styles.subtitle}>Contato</Text>
-              <View style={styles.field}>
-                <Text style={styles.fieldName}>Telefone:</Text>
-                <Text style={styles.fieldValue}>{item.phone}</Text>
-              </View>
-            </View>
-          );
-        })}
-      </View>
+            );
+          })}
+        </View>
+      </ScrollView>
     );
   }
 }

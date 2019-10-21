@@ -98,7 +98,7 @@ export default class Exams extends React.Component {
           </TouchableOpacity>
         </View>
         <DataTable>
-          <DataTable.Header>
+          <DataTable.Header style={styles.borderBottomRow}>
             <DataTable.Title>Nome</DataTable.Title>
             <DataTable.Title style={{ flex: 0.7 }}>Local</DataTable.Title>
             <DataTable.Title style={{ flex: 0.45 }}>Data</DataTable.Title>
@@ -106,7 +106,7 @@ export default class Exams extends React.Component {
 
           {this.state.exams.map(exam => {
             return (
-              <DataTable.Row key={exam.id}>
+              <DataTable.Row style={styles.borderBottomRow} key={exam.id}>
                 <DataTable.Cell>
                   <Text style={styles.tableTextSize}>{exam.name}</Text>
                 </DataTable.Cell>
@@ -142,6 +142,10 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 31,
     alignItems: 'center',
+  },
+  borderBottomRow: {
+    borderBottomColor: '#DFE0EB',
+    borderBottomWidth: 1.5,
   },
   containerButton: {
     flexDirection: 'row',

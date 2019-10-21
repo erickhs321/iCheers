@@ -6,9 +6,14 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  ScrollView,
 } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faUserCog, faPlus } from '@fortawesome/free-solid-svg-icons';
+import {
+  faUserCog,
+  faPlus,
+  faTrashAlt,
+} from '@fortawesome/free-solid-svg-icons';
 import ImagePicker from 'react-native-image-picker';
 
 const options = {
@@ -25,7 +30,9 @@ export default class Configuration extends React.Component {
     weight: '',
     dateOfBirth: '',
     bloodType: 'O+',
-    diseases: ['rubeola', 'diabetes'],
+    diseases: ['Rubeola', 'Diabetes'],
+    profiles: ['Carla', 'Maria'],
+    devices: ['Lenovo k6'],
   };
 
   static navigationOptions = {
@@ -60,66 +67,135 @@ export default class Configuration extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Image
-          source={this.state.avatarSource}
-          style={{ width: 92, height: 94, borderRadius: 100 }}
-        />
-        <TouchableOpacity onPress={this.choosePhoto}>
-          <Text>Alterar</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.logout}>
-          <Text>Logout</Text>
-        </TouchableOpacity>
-        <Text style={styles.title}>Email</Text>
-        <TextInput
-          value={this.state.email}
-          onChangeText={email => this.setState({ email })}
-          style={styles.input}
-        />
-        <Text style={styles.title}>Senha</Text>
-        <TextInput
-          value={this.state.password}
-          onChangeText={password => this.setState({ password })}
-          style={styles.input}
-          secureTextEntry={true}
-        />
-        <Text style={styles.title}>Altura</Text>
-        <TextInput
-          value={this.state.height}
-          onChangeText={height => this.setState({ height })}
-          style={styles.input}
-        />
-        <Text style={styles.title}>Peso(kg)</Text>
-        <TextInput
-          value={this.state.weight}
-          onChangeText={weight => this.setState({ weight })}
-          style={styles.input}
-        />
-        <Text style={styles.title}>Data de Nascimento</Text>
-        <TextInput
-          value={this.state.dateOfBirth}
-          onChangeText={dateOfBirth => this.setState({ dateOfBirth })}
-          style={styles.input}
-        />
-        <Text style={styles.title}>Tipo Sanguíneo</Text>
-        <TextInput
-          value={this.state.bloodType}
-          onChangeText={bloodType => this.setState({ bloodType })}
-          style={styles.input}
-        />
-        <View style={styles.title}>
-          <Text>Doenças</Text>
-          <TouchableOpacity>
-            <FontAwesomeIcon
-              style={styles.plus}
-              size={18}
-              icon={faPlus}
-              color={'#01D300'}
-            />
+      <ScrollView>
+        <View style={styles.container}>
+          <Image
+            source={this.state.avatarSource}
+            style={{ width: 92, height: 94, borderRadius: 100 }}
+          />
+          <TouchableOpacity onPress={this.choosePhoto}>
+            <Text>Alterar</Text>
           </TouchableOpacity>
+          <TouchableOpacity onPress={this.logout}>
+            <Text>Logout</Text>
+          </TouchableOpacity>
+          <Text style={styles.title}>Email</Text>
+          <TextInput
+            value={this.state.email}
+            onChangeText={email => this.setState({ email })}
+            style={styles.input}
+          />
+          <Text style={styles.title}>Senha</Text>
+          <TextInput
+            value={this.state.password}
+            onChangeText={password => this.setState({ password })}
+            style={styles.input}
+            secureTextEntry={true}
+          />
+          <Text style={styles.title}>Altura</Text>
+          <TextInput
+            value={this.state.height}
+            onChangeText={height => this.setState({ height })}
+            style={styles.input}
+          />
+          <Text style={styles.title}>Peso(kg)</Text>
+          <TextInput
+            value={this.state.weight}
+            onChangeText={weight => this.setState({ weight })}
+            style={styles.input}
+          />
+          <Text style={styles.title}>Data de Nascimento</Text>
+          <TextInput
+            value={this.state.dateOfBirth}
+            onChangeText={dateOfBirth => this.setState({ dateOfBirth })}
+            style={styles.input}
+          />
+          <Text style={styles.title}>Tipo Sanguíneo</Text>
+          <TextInput
+            value={this.state.bloodType}
+            onChangeText={bloodType => this.setState({ bloodType })}
+            style={styles.input}
+          />
+          <View style={styles.title}>
+            <Text style={styles.title}>Doenças</Text>
+            <TouchableOpacity>
+              <FontAwesomeIcon
+                style={styles.iconMargin}
+                size={18}
+                icon={faPlus}
+                color={'#01D300'}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.list}>
+            {this.state.diseases.map((disease, index) => {
+              return (
+                <View style={styles.listItem}>
+                  <Text key={index}>- {disease}</Text>
+                  <FontAwesomeIcon
+                    style={styles.iconMargin}
+                    size={12}
+                    icon={faTrashAlt}
+                    color={'#E64D57'}
+                  />
+                </View>
+              );
+            })}
+          </View>
+          <View style={styles.title}>
+            <Text style={styles.title}>Meus Perfis</Text>
+            <TouchableOpacity>
+              <FontAwesomeIcon
+                style={styles.iconMargin}
+                size={18}
+                icon={faPlus}
+                color={'#01D300'}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.list}>
+            {this.state.profiles.map((profile, index) => {
+              return (
+                <View style={styles.listItem}>
+                  <Text key={index}>- {profile}</Text>
+                  <FontAwesomeIcon
+                    style={styles.iconMargin}
+                    size={12}
+                    icon={faTrashAlt}
+                    color={'#E64D57'}
+                  />
+                </View>
+              );
+            })}
+          </View>
+          <View style={styles.title}>
+            <Text style={styles.title}>Dispositivos</Text>
+            <TouchableOpacity>
+              <FontAwesomeIcon
+                style={styles.iconMargin}
+                size={18}
+                icon={faPlus}
+                color={'#01D300'}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.list}>
+            {this.state.devices.map((device, index) => {
+              return (
+                <View style={styles.listItem}>
+                  <Text key={index}>- {device}</Text>
+                  <FontAwesomeIcon
+                    style={styles.iconMargin}
+                    size={12}
+                    icon={faTrashAlt}
+                    color={'#E64D57'}
+                  />
+                </View>
+              );
+            })}
+          </View>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -147,7 +223,16 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
     marginBottom: 20,
   },
-  plus: {
+  iconMargin: {
     marginLeft: 4,
+  },
+  list: {
+    marginTop: 15,
+    alignSelf: 'flex-start',
+    marginBottom: 10,
+  },
+  listItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });

@@ -99,9 +99,15 @@ export default class Exams extends React.Component {
         </View>
         <DataTable>
           <DataTable.Header style={styles.borderBottomRow}>
-            <DataTable.Title>Nome</DataTable.Title>
-            <DataTable.Title style={{ flex: 0.7 }}>Local</DataTable.Title>
-            <DataTable.Title style={{ flex: 0.45 }}>Data</DataTable.Title>
+            <DataTable.Title>
+              <Text style={styles.titleStyle}>Nome</Text>
+            </DataTable.Title>
+            <DataTable.Title style={{ flex: 0.7 }}>
+              <Text style={styles.titleStyle}>Local</Text>
+            </DataTable.Title>
+            <DataTable.Title style={{ flex: 0.45 }}>
+              <Text style={styles.titleStyle}>Data</Text>
+            </DataTable.Title>
           </DataTable.Header>
 
           {this.state.exams.map(exam => {
@@ -152,6 +158,10 @@ const styles = StyleSheet.create({
   },
   button: {
     flexDirection: 'row',
+  },
+  titleStyle: {
+    color: '#9FA2B4',
+    fontSize: 11,
   },
   viewButton: {
     backgroundColor: '#29CC97',

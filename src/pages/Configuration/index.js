@@ -132,16 +132,16 @@ export default class Configuration extends React.Component {
           <View style={styles.list}>
             {this.state.diseases.map((disease, index) => {
               return (
-                <View style={styles.listItem}>
-                  <Text key={index} style={styles.listText}>
-                    - {disease}
-                  </Text>
-                  <FontAwesomeIcon
-                    style={styles.iconMargin}
-                    size={12}
-                    icon={faTrashAlt}
-                    color={'#E64D57'}
-                  />
+                <View key={index} style={styles.listItem}>
+                  <Text style={styles.listText}>- {disease}</Text>
+                  <TouchableOpacity>
+                    <FontAwesomeIcon
+                      style={styles.iconMargin}
+                      size={12}
+                      icon={faTrashAlt}
+                      color={'#E64D57'}
+                    />
+                  </TouchableOpacity>
                 </View>
               );
             })}
@@ -160,16 +160,16 @@ export default class Configuration extends React.Component {
           <View style={styles.list}>
             {this.state.profiles.map((profile, index) => {
               return (
-                <View style={styles.listItem}>
-                  <Text key={index} style={styles.listText}>
-                    - {profile}
-                  </Text>
-                  <FontAwesomeIcon
-                    style={styles.iconMargin}
-                    size={12}
-                    icon={faTrashAlt}
-                    color={'#E64D57'}
-                  />
+                <View key={index} style={styles.listItem}>
+                  <Text style={styles.listText}>- {profile}</Text>
+                  <TouchableOpacity>
+                    <FontAwesomeIcon
+                      style={styles.iconMargin}
+                      size={12}
+                      icon={faTrashAlt}
+                      color={'#E64D57'}
+                    />
+                  </TouchableOpacity>
                 </View>
               );
             })}
@@ -188,16 +188,16 @@ export default class Configuration extends React.Component {
           <View style={styles.list}>
             {this.state.devices.map((device, index) => {
               return (
-                <View style={styles.listItem}>
-                  <Text key={index} style={styles.listText}>
-                    - {device}
-                  </Text>
-                  <FontAwesomeIcon
-                    style={styles.iconMargin}
-                    size={12}
-                    icon={faTrashAlt}
-                    color={'#E64D57'}
-                  />
+                <View key={index} style={styles.listItem}>
+                  <Text style={styles.listText}>- {device}</Text>
+                  <TouchableOpacity>
+                    <FontAwesomeIcon
+                      style={styles.iconMargin}
+                      size={12}
+                      icon={faTrashAlt}
+                      color={'#E64D57'}
+                    />
+                  </TouchableOpacity>
                 </View>
               );
             })}

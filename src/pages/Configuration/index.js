@@ -18,7 +18,7 @@ import {
 import ImagePicker from 'react-native-image-picker';
 
 const options = {
-  title: 'Selecionar foto do exame',
+  title: 'Selecionar foto',
   takePhotoButtonTitle: 'Tirar foto',
   chooseFromLibraryButtonTitle: 'Escolher foto da galeria',
 };
@@ -72,15 +72,14 @@ export default class Configuration extends React.Component {
     return (
       <ScrollView>
         <View style={styles.container}>
-          <Image
-            source={this.state.avatarSource}
-            style={{ width: 92, height: 94, borderRadius: 100, backgroundColor: 'grey' }}
-          />
-          <TouchableOpacity onPress={this.choosePhoto}>
-            <Text>Alterar</Text>
+          <Image source={this.state.avatarSource} style={styles.image} />
+          <TouchableOpacity
+            style={styles.changePhotoButton}
+            onPress={this.choosePhoto}>
+            <Text style={styles.textButton}>Alterar</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.logout}>
-            <Text>Logout</Text>
+          <TouchableOpacity style={styles.logoutButton} onPress={this.logout}>
+            <Text style={styles.textButton}>Deslogar</Text>
           </TouchableOpacity>
           <Text style={styles.title}>Email</Text>
           <TextInput
@@ -234,6 +233,12 @@ const styles = StyleSheet.create({
     padding: 40,
     width: '100%',
   },
+  image: {
+    width: 92,
+    height: 94,
+    borderRadius: 100,
+    backgroundColor: 'grey',
+  },
   title: {
     alignSelf: 'flex-start',
     marginBottom: -15,
@@ -279,9 +284,27 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  changePhotoButton: {
+    marginTop: 10,
+    backgroundColor: '#E64D57',
+    width: 71,
+    height: 24,
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   textButton: {
-    fontSize: 13,
+    fontSize: 11,
     letterSpacing: 0.4,
     color: '#F7F7F7',
+  },
+  logoutButton: {
+    marginTop: 2,
+    backgroundColor: '#363740',
+    borderRadius: 5,
+    height: 24,
+    width: 71,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

@@ -92,20 +92,39 @@ export default class Exams extends React.Component {
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.containerButton}>
-            <TouchableOpacity style={styles.button}>
-              <FontAwesomeIcon size={20} icon={faFilter} />
-              <Text>Filtrar busca</Text>
+            <TouchableOpacity style={styles.filterButton}>
+              <FontAwesomeIcon
+                size={12}
+                icon={faFilter}
+                color={'#E64D57'}
+                style={styles.iconMargin}
+              />
+              <Text style={styles.filterButton}>Filtrar busca</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={this.choosePhoto} style={styles.button}>
-              <FontAwesomeIcon size={20} icon={faPlus} />
-              <Text>Cadastrar exame</Text>
+            <TouchableOpacity
+              onPress={this.choosePhoto}
+              style={styles.registerExamButton}>
+              <FontAwesomeIcon
+                size={12}
+                icon={faPlus}
+                color={'#01D300'}
+                style={styles.iconMargin}
+              />
+              <Text style={{ color: '#01D300', fontSize: 10 }}>
+                Cadastrar exame
+              </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button}>
-              <FontAwesomeIcon size={20} icon={faEye} />
-              <Text>Ver cartão de vacina</Text>
+            <TouchableOpacity style={styles.vaccineCardButton}>
+              <FontAwesomeIcon
+                size={13}
+                icon={faEye}
+                color={'#252733'}
+                style={styles.iconMargin}
+              />
+              <Text style={styles.vaccineCardButton}>Ver cartão de vacina</Text>
             </TouchableOpacity>
           </View>
-          <DataTable>
+          <DataTable style={styles.table}>
             <DataTable.Header style={styles.borderBottomRow}>
               <DataTable.Title>
                 <Text style={styles.titleStyle}>Nome</Text>
@@ -158,12 +177,34 @@ const styles = StyleSheet.create({
     paddingTop: 31,
     alignItems: 'center',
   },
+  table: {
+    width: '97%',
+  },
+  filterButton: {
+    flexDirection: 'row',
+    color: '#E64D57',
+    fontSize: 10,
+    fontWeight: '500',
+  },
+  registerExamButton: {
+    flexDirection: 'row',
+    color: '#01D300',
+    fontSize: 10,
+    marginLeft: 14,
+    marginRight: 14,
+  },
+  vaccineCardButton: {
+    flexDirection: 'row',
+    color: '#252733',
+    fontSize: 10,
+  },
   borderBottomRow: {
     borderBottomColor: '#DFE0EB',
     borderBottomWidth: 1.5,
   },
   containerButton: {
     flexDirection: 'row',
+    marginBottom: 19,
   },
   button: {
     flexDirection: 'row',
@@ -184,6 +225,9 @@ const styles = StyleSheet.create({
   tableTextSize: {
     fontSize: 10,
     marginTop: 17,
+  },
+  iconMargin: {
+    marginRight: 2,
   },
   nameColumn: {
     flex: 2,

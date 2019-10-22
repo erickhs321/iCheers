@@ -40,6 +40,7 @@ export default class MedicalRecord extends React.Component {
     bloodType: 'O+',
     diseases: ['Rubeola', 'Diabetes', 'Glaucoma', 'Anemia'],
     frequency: '',
+    readQrCode: false,
   };
 
   static navigationOptions = {
@@ -50,19 +51,32 @@ export default class MedicalRecord extends React.Component {
   };
 
   onSuccess = async e => {
-    await this.setState({ id: e.data });
+    await this.setState({ id: e.data, readQrCode: true });
+  };
+
+  readAgain = () => {
+    this.setState({ readQrCode: false });
   };
 
   render() {
     return (
       <ScrollView>
-        <QRCodeScanner
-          onRead={this.onSuccess}
-          showMarker={true}
-          checkAndroid6Permissions={true}
-          cameraStyle={styles.cameraContainer}
-        />
-        <Text>{this.state.id}</Text>
+        {!this.state.readQrCode && (
+          <QRCodeScanner
+            onRead={this.onSuccess}
+            showMarker={true}
+            checkAndroid6Permissions={true}
+            cameraStyle={styles.cameraContainer}
+          />
+        )}
+        {this.state.readQrCode && (
+          <View>
+            <Text>{this.state.id}</Text>
+            <TouchableOpacity onPress={this.readAgain}>
+              <Text>Ler novamente</Text>
+            </TouchableOpacity>
+          </View>
+        )}
 
         {/* <View style={styles.container}>
           <Text style={styles.major}>Prontuário</Text>

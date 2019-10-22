@@ -16,6 +16,7 @@
     "@react-native-community/async-storage": "^1.6.2",
     "react": "16.9.0",
     "react-native": "0.61.1",
+    "react-native-camera": "^3.8.0",
     "react-native-gesture-handler": "^1.4.1",
     "react-native-image-picker": "^1.1.0",
     "react-native-navigation": "^2.27.9",

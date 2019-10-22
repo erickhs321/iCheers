@@ -44,6 +44,8 @@ target 'iCheers' do
 
   pod 'react-native-camera', :path => '../node_modules/react-native-camera'
 
+  pod 'RNPermissions', :path => '../node_modules/react-native-permissions'
+
   target 'iCheersTests' do
     inherit! :search_paths
     # Pods for testing

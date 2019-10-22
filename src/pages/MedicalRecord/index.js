@@ -8,15 +8,16 @@ import {
   Image,
   ScrollView,
   Picker,
+  Dimensions,
 } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
-  fause,
   faPlus,
   faTrashAlt,
   faNotesMedical,
 } from '@fortawesome/free-solid-svg-icons';
 import ImagePicker from 'react-native-image-picker';
+import QRCodeScanner from 'react-native-qrcode-scanner';
 
 const options = {
   title: 'Selecionar foto',
@@ -26,18 +27,18 @@ const options = {
 
 export default class MedicalRecord extends React.Component {
   state = {
-    name : 'Erick Henrique',
+    name: 'Erick Henrique',
     drink: 'Socialmente',
     cigarets: 'Não Fumante',
     psychoactive: 'N/A',
-    cardiorespiratory: 'Normal',    
+    cardiorespiratory: 'Normal',
     mobility: 'Normal',
     deficiency: 'N/A',
     height: '1.8m',
     weight: '60kg',
     dateOfBirth: '01/01/2001',
     bloodType: 'O+',
-    diseases: ['Rubeola', 'Diabetes','Glaucoma', 'Anemia'],
+    diseases: ['Rubeola', 'Diabetes', 'Glaucoma', 'Anemia'],
     frequency: '',
   };
 
@@ -48,29 +49,22 @@ export default class MedicalRecord extends React.Component {
     ),
   };
 
-  choosePhoto = () => {
-    ImagePicker.showImagePicker(options, response => {
-      console.log('Response = ', response);
-
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('Image Picker Error: ', response.error);
-      } else {
-        let source = { uri: response.uri };
-
-        this.setState({
-          avatarSource: source,
-          pic: response.data,
-        });
-      }
-    });
+  onSuccess = async e => {
+    await this.setState({ id: e.data });
   };
 
   render() {
     return (
       <ScrollView>
-        <View style={styles.container}>
+        <QRCodeScanner
+          onRead={this.onSuccess}
+          showMarker={true}
+          checkAndroid6Permissions={true}
+          cameraStyle={styles.cameraContainer}
+        />
+        <Text>{this.state.id}</Text>
+
+        {/* <View style={styles.container}>
           <Text style={styles.major}>Prontuário</Text>
           <Image source={this.state.avatarSource} style={styles.image} />
           <Text style={styles.title}>Nome</Text>
@@ -78,7 +72,7 @@ export default class MedicalRecord extends React.Component {
             value={this.state.name}
             onChangeText={name => this.setState({ name })}
             style={styles.input}
-          />          
+          />
           <Text style={styles.title}>Altura</Text>
           <TextInput
             value={this.state.height}
@@ -177,15 +171,16 @@ export default class MedicalRecord extends React.Component {
             <Picker.Item label="Todos os Dias" value="everyday" />
             <Picker.Item label="Uma vez por semana" value="onceAWeek" />
           </Picker>
-
-
-        </View>
+        </View> */}
       </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  cameraContainer: {
+    height: Dimensions.get('window').height,
+  },
   container: {
     alignItems: 'center',
     padding: 40,
@@ -197,7 +192,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     backgroundColor: 'grey',
   },
-  major : {
+  major: {
     padding: 13,
     fontSize: 15,
   },

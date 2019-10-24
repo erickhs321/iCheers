@@ -5,7 +5,7 @@ export default class Quiz extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPage: 1,
+      currentQuestion: 1,
       visible: true,
     };
   }
@@ -13,7 +13,7 @@ export default class Quiz extends React.Component {
   next() {
     this.setState({
       ...this.state,
-      currentPage: this.state.currentPage + 1,
+      currentQuestion: this.state.currentQuestion + 1,
       lastPage: false,
     });
   }
@@ -21,7 +21,7 @@ export default class Quiz extends React.Component {
   previous() {
     this.setState({
       ...this.state,
-      currentPage: this.state.currentPage - 1,
+      currentQuestion: this.state.currentQuestion - 1,
     });
   }
 
@@ -39,10 +39,11 @@ export default class Quiz extends React.Component {
           style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <View style={styles.box}>
             <Text style={styles.text1}>
-              pergunta {this.state.currentPage}/{this.props.questions.length}
+              pergunta {this.state.currentQuestion}/
+              {this.props.questions.length}
             </Text>
             <Text style={styles.text2}>
-              {this.props.questions[this.state.currentPage - 1]}
+              {this.props.questions[this.state.currentQuestion - 1]}
             </Text>
             <View style={styles.icons}>
               <TouchableOpacity>
@@ -77,7 +78,7 @@ export default class Quiz extends React.Component {
               </TouchableOpacity>
             </View>
             <View style={styles.containerButton}>
-              {this.state.currentPage > 1 && (
+              {this.state.currentQuestion > 1 && (
                 <TouchableOpacity
                   onPress={() => this.previous()}
                   style={styles.proxima}>
@@ -87,13 +88,13 @@ export default class Quiz extends React.Component {
 
               <TouchableOpacity
                 onPress={
-                  this.state.currentPage === this.props.questions.length
+                  this.state.currentQuestion === this.props.questions.length
                     ? () => this.end()
                     : () => this.next()
                 }
                 style={styles.proxima}>
                 <Text style={styles.text3}>
-                  {this.state.currentPage === this.props.questions.length
+                  {this.state.currentQuestion === this.props.questions.length
                     ? 'Finalizar'
                     : 'Próxima'}
                 </Text>

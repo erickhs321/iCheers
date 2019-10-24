@@ -12,11 +12,18 @@ export default class Home extends React.Component {
     ),
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      questions: ['Você está bem?', 'Como vai hoje?', 'Teste?'] || [],
+    };
+  }
+
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Home</Text>
-        <Quiz />
+        <Quiz questions={this.state.questions} />
       </View>
     );
   }

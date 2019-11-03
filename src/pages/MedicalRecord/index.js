@@ -18,6 +18,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import ImagePicker from 'react-native-image-picker';
 import QRCodeScanner from 'react-native-qrcode-scanner';
+import { white } from 'ansi-colors';
 
 const options = {
   title: 'Selecionar foto',
@@ -70,11 +71,14 @@ export default class MedicalRecord extends React.Component {
           />
         )}
         {this.state.readQrCode && (
-          <View>
-            <Text>{this.state.id}</Text>
-            <TouchableOpacity onPress={this.readAgain}>
-              <Text>Ler novamente</Text>
+          <View style={styles.container}>
+            <View style={styles.box}>
+            <Image source={this.state.avatarSource} style={styles.image}/>
+            <Text style={styles.listText}>{this.state.id}</Text>
+            <TouchableOpacity  style={styles.lernovamente} onPress={this.readAgain}>
+              <Text style={styles.text3}>Ler novamente</Text>
             </TouchableOpacity>
+            </View>
           </View>
         )}
 
@@ -200,6 +204,14 @@ const styles = StyleSheet.create({
     padding: 40,
     width: '100%',
   },
+  box: {
+    padding: 10,
+    width: 300,
+    height: 260,
+    backgroundColor: '#363740',
+    alignItems: 'center',
+    borderRadius: 5,
+  },
   image: {
     width: 92,
     height: 94,
@@ -240,7 +252,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   listText: {
-    fontSize: 12,
+    color:'white',
+    padding: 3,
   },
   select: {
     fontSize: 10,
@@ -277,5 +290,18 @@ const styles = StyleSheet.create({
     width: 71,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  text3: {
+    lineHeight: 23,
+    textAlign: 'center',
+    letterSpacing: 0.3,
+    fontSize: 12,
+    color: '#ffff',
+  },
+  lernovamente: {
+    backgroundColor: '#E64D57',
+    width: 130,
+    height: 27,
+    borderRadius: 40,
   },
 });

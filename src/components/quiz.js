@@ -121,6 +121,7 @@ const styles = StyleSheet.create({
     width: '120%',
     flexDirection: 'row',
     justifyContent: 'space-around',
+    
   },
 
   text1: {

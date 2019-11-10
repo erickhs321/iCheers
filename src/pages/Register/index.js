@@ -10,7 +10,14 @@ import {
 
 export default class Register extends React.Component {
   static navigationOptions = {
-    drawerLabel: 'Register',
+    title: 'Register',
+    headerStyle: {
+      backgroundColor: '#E64D57',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
   };
 
   render() {

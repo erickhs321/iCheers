@@ -16,6 +16,7 @@ import {
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import ImagePicker from 'react-native-image-picker';
+import { Body, Header, Title } from 'native-base';
 
 const options = {
   title: 'Selecionar foto',
@@ -70,159 +71,166 @@ export default class Configuration extends React.Component {
 
   render() {
     return (
-      <ScrollView>
-        <View style={styles.container}>
-          <Image source={this.state.avatarSource} style={styles.image} />
-          <TouchableOpacity
-            style={styles.changePhotoButton}
-            onPress={this.choosePhoto}>
-            <Text style={styles.textButton}>Alterar</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.logoutButton} onPress={this.logout}>
-            <Text style={styles.textButton}>Deslogar</Text>
-          </TouchableOpacity>
-          <Text style={styles.title}>Email</Text>
-          <TextInput
-            value={this.state.email}
-            onChangeText={email => this.setState({ email })}
-            style={styles.input}
-          />
-          <Text style={styles.title}>Senha</Text>
-          <TextInput
-            value={this.state.password}
-            onChangeText={password => this.setState({ password })}
-            style={styles.input}
-            secureTextEntry={true}
-          />
-          <Text style={styles.title}>Altura</Text>
-          <TextInput
-            value={this.state.height}
-            onChangeText={height => this.setState({ height })}
-            style={styles.input}
-          />
-          <Text style={styles.title}>Peso(kg)</Text>
-          <TextInput
-            value={this.state.weight}
-            onChangeText={weight => this.setState({ weight })}
-            style={styles.input}
-          />
-          <Text style={styles.title}>Data de Nascimento</Text>
-          <TextInput
-            value={this.state.dateOfBirth}
-            onChangeText={dateOfBirth => this.setState({ dateOfBirth })}
-            style={styles.input}
-          />
-          <Text style={styles.title}>Tipo Sanguíneo</Text>
-          <TextInput
-            value={this.state.bloodType}
-            onChangeText={bloodType => this.setState({ bloodType })}
-            style={styles.input}
-          />
-          <View style={styles.title}>
-            <Text style={styles.title}>Doenças</Text>
-            <TouchableOpacity>
-              <FontAwesomeIcon
-                style={styles.iconMargin}
-                size={18}
-                icon={faPlus}
-                color={'#01D300'}
-              />
+      <>
+        <Header style={{ backgroundColor: '#E64D57' }}>
+          <Body style={{ alignItems: 'center' }}>
+            <Title>Configuração</Title>
+          </Body>
+        </Header>
+        <ScrollView>
+          <View style={styles.container}>
+            <Image source={this.state.avatarSource} style={styles.image} />
+            <TouchableOpacity
+              style={styles.changePhotoButton}
+              onPress={this.choosePhoto}>
+              <Text style={styles.textButton}>Alterar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.logoutButton} onPress={this.logout}>
+              <Text style={styles.textButton}>Deslogar</Text>
+            </TouchableOpacity>
+            <Text style={styles.title}>Email</Text>
+            <TextInput
+              value={this.state.email}
+              onChangeText={email => this.setState({ email })}
+              style={styles.input}
+            />
+            <Text style={styles.title}>Senha</Text>
+            <TextInput
+              value={this.state.password}
+              onChangeText={password => this.setState({ password })}
+              style={styles.input}
+              secureTextEntry={true}
+            />
+            <Text style={styles.title}>Altura</Text>
+            <TextInput
+              value={this.state.height}
+              onChangeText={height => this.setState({ height })}
+              style={styles.input}
+            />
+            <Text style={styles.title}>Peso(kg)</Text>
+            <TextInput
+              value={this.state.weight}
+              onChangeText={weight => this.setState({ weight })}
+              style={styles.input}
+            />
+            <Text style={styles.title}>Data de Nascimento</Text>
+            <TextInput
+              value={this.state.dateOfBirth}
+              onChangeText={dateOfBirth => this.setState({ dateOfBirth })}
+              style={styles.input}
+            />
+            <Text style={styles.title}>Tipo Sanguíneo</Text>
+            <TextInput
+              value={this.state.bloodType}
+              onChangeText={bloodType => this.setState({ bloodType })}
+              style={styles.input}
+            />
+            <View style={styles.title}>
+              <Text style={styles.title}>Doenças</Text>
+              <TouchableOpacity>
+                <FontAwesomeIcon
+                  style={styles.iconMargin}
+                  size={18}
+                  icon={faPlus}
+                  color={'#01D300'}
+                />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.list}>
+              {this.state.diseases.map((disease, index) => {
+                return (
+                  <View key={index} style={styles.listItem}>
+                    <Text style={styles.listText}>- {disease}</Text>
+                    <TouchableOpacity>
+                      <FontAwesomeIcon
+                        style={styles.iconMargin}
+                        size={12}
+                        icon={faTrashAlt}
+                        color={'#E64D57'}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                );
+              })}
+            </View>
+            <View style={styles.title}>
+              <Text style={styles.title}>Meus Perfis</Text>
+              <TouchableOpacity>
+                <FontAwesomeIcon
+                  style={styles.iconMargin}
+                  size={18}
+                  icon={faPlus}
+                  color={'#01D300'}
+                />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.list}>
+              {this.state.profiles.map((profile, index) => {
+                return (
+                  <View key={index} style={styles.listItem}>
+                    <Text style={styles.listText}>- {profile}</Text>
+                    <TouchableOpacity>
+                      <FontAwesomeIcon
+                        style={styles.iconMargin}
+                        size={12}
+                        icon={faTrashAlt}
+                        color={'#E64D57'}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                );
+              })}
+            </View>
+            <View style={styles.title}>
+              <Text style={styles.title}>Dispositivos</Text>
+              <TouchableOpacity>
+                <FontAwesomeIcon
+                  style={styles.iconMargin}
+                  size={18}
+                  icon={faPlus}
+                  color={'#01D300'}
+                />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.list}>
+              {this.state.devices.map((device, index) => {
+                return (
+                  <View key={index} style={styles.listItem}>
+                    <Text style={styles.listText}>- {device}</Text>
+                    <TouchableOpacity>
+                      <FontAwesomeIcon
+                        style={styles.iconMargin}
+                        size={12}
+                        icon={faTrashAlt}
+                        color={'#E64D57'}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                );
+              })}
+            </View>
+            <Text style={styles.title}>Frequência</Text>
+            <Picker
+              selectedValue={this.state.frequency}
+              style={styles.select}
+              onValueChange={(itemValue, itemIndex) =>
+                this.setState({ frequency: itemValue })
+              }>
+              <Picker.Item label="Todo Dia" value="everyday" />
+              <Picker.Item label="Uma vez por semana" value="onceAWeek" />
+            </Picker>
+            <Text style={styles.title}>Chave de criptografia</Text>
+            <TextInput
+              value={this.state.encryptionKey}
+              onChangeText={encryptionKey => this.setState({ encryptionKey })}
+              style={styles.input}
+            />
+            <TouchableOpacity style={styles.submitButton}>
+              <Text style={styles.textButton}>Salvar Configurações</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.list}>
-            {this.state.diseases.map((disease, index) => {
-              return (
-                <View key={index} style={styles.listItem}>
-                  <Text style={styles.listText}>- {disease}</Text>
-                  <TouchableOpacity>
-                    <FontAwesomeIcon
-                      style={styles.iconMargin}
-                      size={12}
-                      icon={faTrashAlt}
-                      color={'#E64D57'}
-                    />
-                  </TouchableOpacity>
-                </View>
-              );
-            })}
-          </View>
-          <View style={styles.title}>
-            <Text style={styles.title}>Meus Perfis</Text>
-            <TouchableOpacity>
-              <FontAwesomeIcon
-                style={styles.iconMargin}
-                size={18}
-                icon={faPlus}
-                color={'#01D300'}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.list}>
-            {this.state.profiles.map((profile, index) => {
-              return (
-                <View key={index} style={styles.listItem}>
-                  <Text style={styles.listText}>- {profile}</Text>
-                  <TouchableOpacity>
-                    <FontAwesomeIcon
-                      style={styles.iconMargin}
-                      size={12}
-                      icon={faTrashAlt}
-                      color={'#E64D57'}
-                    />
-                  </TouchableOpacity>
-                </View>
-              );
-            })}
-          </View>
-          <View style={styles.title}>
-            <Text style={styles.title}>Dispositivos</Text>
-            <TouchableOpacity>
-              <FontAwesomeIcon
-                style={styles.iconMargin}
-                size={18}
-                icon={faPlus}
-                color={'#01D300'}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.list}>
-            {this.state.devices.map((device, index) => {
-              return (
-                <View key={index} style={styles.listItem}>
-                  <Text style={styles.listText}>- {device}</Text>
-                  <TouchableOpacity>
-                    <FontAwesomeIcon
-                      style={styles.iconMargin}
-                      size={12}
-                      icon={faTrashAlt}
-                      color={'#E64D57'}
-                    />
-                  </TouchableOpacity>
-                </View>
-              );
-            })}
-          </View>
-          <Text style={styles.title}>Frequência</Text>
-          <Picker
-            selectedValue={this.state.frequency}
-            style={styles.select}
-            onValueChange={(itemValue, itemIndex) =>
-              this.setState({ frequency: itemValue })
-            }>
-            <Picker.Item label="Todo Dia" value="everyday" />
-            <Picker.Item label="Uma vez por semana" value="onceAWeek" />
-          </Picker>
-          <Text style={styles.title}>Chave de criptografia</Text>
-          <TextInput
-            value={this.state.encryptionKey}
-            onChangeText={encryptionKey => this.setState({ encryptionKey })}
-            style={styles.input}
-          />
-          <TouchableOpacity style={styles.submitButton}>
-            <Text style={styles.textButton}>Salvar Configurações</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </>
     );
   }
 }

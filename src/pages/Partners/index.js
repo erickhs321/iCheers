@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text, Image, ScrollView } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHandshake } from '@fortawesome/free-solid-svg-icons';
+import { Body, Header, Title } from 'native-base';
 
 export default class Configuration extends React.Component {
   state = {
@@ -35,47 +36,54 @@ export default class Configuration extends React.Component {
 
   render() {
     return (
-      <ScrollView>
-        <View style={styles.container}>
-          {this.state.partners.map((item, index) => {
-            return (
-              <View style={styles.card} key={index}>
-                <View style={styles.header}>
-                  <Image
-                    style={styles.image}
-                    source={{
-                      uri: item.image,
-                    }}
-                  />
-                  <Text style={styles.title}>{item.title}</Text>
-                </View>
-                <View style={{ marginBottom: 14 }}>
-                  <Text style={styles.subtitle}>Endereço</Text>
-                  <View>
-                    <View style={styles.field}>
-                      <Text style={styles.fieldName}>Rua:</Text>
-                      <Text style={styles.fieldValue}>{item.street}</Text>
-                    </View>
-                    <View style={styles.field}>
-                      <Text style={styles.fieldName}>Número:</Text>
-                      <Text style={styles.fieldValue}>{item.number}</Text>
-                    </View>
-                    <View style={styles.field}>
-                      <Text style={styles.fieldName}>Cidade:</Text>
-                      <Text style={styles.fieldValue}>{item.city}</Text>
+      <>
+        <Header style={{ backgroundColor: '#E64D57' }}>
+          <Body style={{ alignItems: 'center' }}>
+            <Title>Parceiros</Title>
+          </Body>
+        </Header>
+        <ScrollView>
+          <View style={styles.container}>
+            {this.state.partners.map((item, index) => {
+              return (
+                <View style={styles.card} key={index}>
+                  <View style={styles.header}>
+                    <Image
+                      style={styles.image}
+                      source={{
+                        uri: item.image,
+                      }}
+                    />
+                    <Text style={styles.title}>{item.title}</Text>
+                  </View>
+                  <View style={{ marginBottom: 14 }}>
+                    <Text style={styles.subtitle}>Endereço</Text>
+                    <View>
+                      <View style={styles.field}>
+                        <Text style={styles.fieldName}>Rua:</Text>
+                        <Text style={styles.fieldValue}>{item.street}</Text>
+                      </View>
+                      <View style={styles.field}>
+                        <Text style={styles.fieldName}>Número:</Text>
+                        <Text style={styles.fieldValue}>{item.number}</Text>
+                      </View>
+                      <View style={styles.field}>
+                        <Text style={styles.fieldName}>Cidade:</Text>
+                        <Text style={styles.fieldValue}>{item.city}</Text>
+                      </View>
                     </View>
                   </View>
+                  <Text style={styles.subtitle}>Contato</Text>
+                  <View style={styles.field}>
+                    <Text style={styles.fieldName}>Telefone:</Text>
+                    <Text style={styles.fieldValue}>{item.phone}</Text>
+                  </View>
                 </View>
-                <Text style={styles.subtitle}>Contato</Text>
-                <View style={styles.field}>
-                  <Text style={styles.fieldName}>Telefone:</Text>
-                  <Text style={styles.fieldValue}>{item.phone}</Text>
-                </View>
-              </View>
-            );
-          })}
-        </View>
-      </ScrollView>
+              );
+            })}
+          </View>
+        </ScrollView>
+      </>
     );
   }
 }

@@ -18,6 +18,7 @@ import {
 import ImagePicker from 'react-native-image-picker';
 import Ocr from 'react-native-tesseract-ocr';
 import { DataTable } from 'react-native-paper';
+import { Container, Header, Icon, Fab } from 'native-base';
 
 const options = {
   title: 'Selecionar foto do exame',
@@ -99,21 +100,9 @@ export default class Exams extends React.Component {
                 color={'#E64D57'}
                 style={styles.iconMargin}
               />
-              <Text style={styles.filterButton}>Filtrar busca</Text>
+              <Text style={styles.filterButton}> Filtrar busca      </Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              onPress={this.choosePhoto}
-              style={styles.registerExamButton}>
-              <FontAwesomeIcon
-                size={12}
-                icon={faPlus}
-                color={'#01D300'}
-                style={styles.iconMargin}
-              />
-              <Text style={{ color: '#01D300', fontSize: 10 }}>
-                Cadastrar exame
-              </Text>
-            </TouchableOpacity>
+
             <TouchableOpacity style={styles.vaccineCardButton}>
               <FontAwesomeIcon
                 size={13}
@@ -121,7 +110,7 @@ export default class Exams extends React.Component {
                 color={'#252733'}
                 style={styles.iconMargin}
               />
-              <Text style={styles.vaccineCardButton}>Ver cartão de vacina</Text>
+              <Text style={styles.vaccineCardButton}> Ver cartão de vacina</Text>
             </TouchableOpacity>
           </View>
           <DataTable style={styles.table}>
@@ -167,6 +156,18 @@ export default class Exams extends React.Component {
             style={{ width: 200, height: 200, margin: 10, padding: 10 }}
           />
           <Text style>{this.state.text}</Text>
+          <View style={{ flex: 1 }}>
+            <TouchableOpacity
+              onPress={this.choosePhoto}
+              style={styles.registerExamButton}>
+              <FontAwesomeIcon
+                size={40}
+                icon={faPlus}
+                color={'white'}
+                style={styles.iconMargin}
+              />
+            </TouchableOpacity>
+        </View>
         </View>
       </ScrollView>
     );
@@ -183,20 +184,24 @@ const styles = StyleSheet.create({
   filterButton: {
     flexDirection: 'row',
     color: '#E64D57',
-    fontSize: 10,
+    fontSize: 15,
     fontWeight: '500',
   },
   registerExamButton: {
     flexDirection: 'row',
     color: '#01D300',
-    fontSize: 10,
-    marginLeft: 14,
-    marginRight: 14,
+    fontSize: 15,
+    alignItems:'center',
+    justifyContent: 'center',
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+    backgroundColor: '#01D300',
   },
   vaccineCardButton: {
     flexDirection: 'row',
     color: '#252733',
-    fontSize: 10,
+    fontSize: 15,
   },
   borderBottomRow: {
     borderBottomColor: '#DFE0EB',
@@ -211,7 +216,7 @@ const styles = StyleSheet.create({
   },
   titleStyle: {
     color: '#9FA2B4',
-    fontSize: 11,
+    fontSize: 15,
   },
   viewButton: {
     backgroundColor: '#29CC97',
@@ -223,7 +228,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   tableTextSize: {
-    fontSize: 10,
+    fontSize: 12,
     marginTop: 17,
   },
   iconMargin: {

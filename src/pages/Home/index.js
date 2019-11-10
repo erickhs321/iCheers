@@ -50,7 +50,7 @@ export default class Home extends React.Component {
                 data={data}
                 contentInset={{ top: 100, bottom: 20 }}
                 curve={shape.curveNatural}
-                svg={{ fill: 'rgba(230, 77, 87, 0.8)' }}
+                svg={{ fill: 'rgba(6, 125, 255, 0.8)' }}
               >
                 <Grid />
               </AreaChart>

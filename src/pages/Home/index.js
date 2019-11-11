@@ -27,7 +27,6 @@ export default class Home extends React.Component {
     const data = [50, 40, 40, 55, 43, 54, 60, 67, 45, 53, 53, 24, 50, 40, 50]
     return (
       <>
-        <StatusBar backgroundColor={'red'} />
         <Container style={{ flex: 1, justifyContent: 'center', marginBottom: 200 }}>
           <Header style={{ backgroundColor: '#E64D57' }}>
             <Body style={{ alignItems: 'center' }}>
@@ -37,18 +36,10 @@ export default class Home extends React.Component {
 
           <Content>
             <Card>
-              <CardItem>
-                <Left>
-                  <Thumbnail source={{ uri: 'Image URL' }} />
-                  <Body>
-
-                  </Body>
-                </Left>
-              </CardItem>
               <AreaChart
                 style={{ height: 200 }}
                 data={data}
-                contentInset={{ top: 100, bottom: 20 }}
+                contentInset={{ top: 50, bottom: 10 }}
                 curve={shape.curveNatural}
                 svg={{ fill: 'rgba(6, 125, 255, 0.8)' }}
               >

@@ -6,19 +6,20 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
+  Dimensions,
 } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
   faFileMedicalAlt,
-  faFilter,
   faPlus,
-  faEye,
-  Button,
+  faSyringe,
+  faEllipsisV,
 } from '@fortawesome/free-solid-svg-icons';
 import ImagePicker from 'react-native-image-picker';
 import Ocr from 'react-native-tesseract-ocr';
-import { DataTable } from 'react-native-paper';
-import { Body, Header, Title, Icon, Fab } from 'native-base';
+import { Body, Header, Title, Fab, Icon, Button } from 'native-base';
+import { Searchbar } from 'react-native-paper';
+import ExamItem from '../../components/examItem';
 
 const options = {
   title: 'Selecionar foto do exame',
@@ -35,6 +36,8 @@ export default class Exams extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      fabActive: false,
+      query: '',
       avatarSource: null,
       text: '',
       exams: [
@@ -98,104 +101,77 @@ export default class Exams extends React.Component {
             <Title>Exames</Title>
           </Body>
         </Header>
+        <Searchbar
+          style={{ width: '98%' }}
+          placeholder="Digite o nome do exame"
+          onChangeText={query => {
+            this.setState({ ...this.state, query });
+          }}
+          value={this.state.query}
+        />
         <ScrollView>
           <View style={styles.container}>
-            <View style={styles.containerButton}>
-              <TouchableOpacity style={styles.filterButton}>
-                <FontAwesomeIcon
-                  size={12}
-                  icon={faFilter}
-                  color={'#E64D57'}
-                  style={styles.iconMargin}
-                />
-                <Text style={styles.filterButton}> Filtrar busca </Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={styles.vaccineCardButton}>
-                <FontAwesomeIcon
-                  size={13}
-                  icon={faEye}
-                  color={'#252733'}
-                  style={styles.iconMargin}
-                />
-                <Text style={styles.vaccineCardButton}>
-                  {' '}
-                  Ver cartão de vacina
-                </Text>
-              </TouchableOpacity>
+            <View style={styles.examsList}>
+              {this.state.exams
+                .filter(item => item.name.includes(this.state.query))
+                .map(item => (
+                  <ExamItem
+                    key={item.id}
+                    name={item.name}
+                    place={item.place}
+                    date={item.date}
+                  />
+                ))}
             </View>
-            <DataTable style={styles.table}>
-              <DataTable.Header style={styles.borderBottomRow}>
-                <DataTable.Title>
-                  <Text style={styles.titleStyle}>Nome</Text>
-                </DataTable.Title>
-                <DataTable.Title style={{ flex: 0.7 }}>
-                  <Text style={styles.titleStyle}>Local</Text>
-                </DataTable.Title>
-                <DataTable.Title style={{ flex: 0.45 }}>
-                  <Text style={styles.titleStyle}>Data</Text>
-                </DataTable.Title>
-              </DataTable.Header>
-
-              {this.state.exams.map(exam => {
-                return (
-                  <DataTable.Row style={styles.borderBottomRow} key={exam.id}>
-                    <DataTable.Cell>
-                      <Text style={styles.tableTextSize}>{exam.name}</Text>
-                    </DataTable.Cell>
-                    <DataTable.Cell>
-                      <Text style={styles.tableTextSize}>{exam.place}</Text>
-                    </DataTable.Cell>
-
-                    <Text style={styles.tableTextSize}>
-                      {exam.date}
-                      {'    '}
-                    </Text>
-
-                    <Text style={styles.tableTextSize}>
-                      <TouchableOpacity style={styles.viewButton}>
-                        <FontAwesomeIcon
-                          size={14}
-                          icon={faEye}
-                          color={'#fff'}
-                        />
-                      </TouchableOpacity>
-                    </Text>
-                  </DataTable.Row>
-                );
-              })}
-            </DataTable>
 
             <Image
               source={this.state.avatarSource}
               style={{ width: 200, height: 200, margin: 10, padding: 10 }}
             />
             <Text style>{this.state.text}</Text>
-            <View style={{ flex: 1 }}>
-              <TouchableOpacity
-                onPress={this.choosePhoto}
-                style={styles.registerExamButton}>
-                <FontAwesomeIcon
-                  size={40}
-                  icon={faPlus}
-                  color={'white'}
-                  style={styles.iconMargin}
-                />
-              </TouchableOpacity>
-            </View>
           </View>
         </ScrollView>
+        <Fab
+          active={this.state.fabActive}
+          direction="up"
+          containerStyle={{}}
+          style={{ backgroundColor: '#5067FF' }}
+          position="bottomRight"
+          onPress={() => this.setState({ fabActive: !this.state.fabActive })}>
+          <FontAwesomeIcon size={20} icon={faEllipsisV} color={'#fff'} />
+          <Button
+            onPress={this.choosePhoto}
+            style={{ backgroundColor: '#00b386' }}>
+            <FontAwesomeIcon size={20} icon={faPlus} color={'#fff'} />
+          </Button>
+          <Button style={{ backgroundColor: '#DD5144' }}>
+            <FontAwesomeIcon size={20} icon={faSyringe} color={'#fff'} />
+          </Button>
+        </Fab>
+        {/* <TouchableOpacity
+          onPress={this.choosePhoto}
+          style={styles.registerExamButton}>
+          <FontAwesomeIcon
+            size={20}
+            icon={faPlus}
+            color={'white'}
+            style={styles.iconMargin}
+          />
+        </TouchableOpacity> */}
       </>
     );
   }
 }
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 31,
+    paddingTop: 5,
     alignItems: 'center',
+    height: Dimensions.get('window').height,
   },
-  table: {
-    width: '97%',
+
+  examsList: {
+    width: '100%',
+    alignItems: 'center',
   },
   filterButton: {
     flexDirection: 'row',
@@ -204,15 +180,16 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   registerExamButton: {
+    position: 'absolute',
+    right: 5,
+    bottom: 5,
     flexDirection: 'row',
-    color: '#01D300',
-    fontSize: 15,
     alignItems: 'center',
     justifyContent: 'center',
     width: 50,
     height: 50,
-    borderRadius: 50,
-    backgroundColor: '#01D300',
+    borderRadius: 30,
+    backgroundColor: '#067DFF',
   },
   vaccineCardButton: {
     flexDirection: 'row',

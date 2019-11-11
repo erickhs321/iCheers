@@ -5,6 +5,7 @@ import {
   faMapMarkerAlt,
   faEye,
   faFileSignature,
+  faCalendarDay,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { Card } from 'native-base';
@@ -15,11 +16,15 @@ export default function ExamItem(props) {
       <Card>
         <View style={styles.card}>
           <View style={styles.content}>
+            <View style={styles.dateContainer}>
+              <FontAwesomeIcon size={15} icon={faCalendarDay} color="#495057" />
+              <Text style={styles.dateValue}>{props.date}</Text>
+            </View>
             <View style={styles.header}>
               <FontAwesomeIcon
                 size={20}
                 icon={faFileSignature}
-                color="#E64D57"
+                color="#495057"
               />
               <Text style={styles.title}>{props.name}</Text>
             </View>
@@ -27,7 +32,7 @@ export default function ExamItem(props) {
               <FontAwesomeIcon
                 size={20}
                 icon={faMapMarkerAlt}
-                color="#5067FF"
+                color="#495057"
               />
               <Text style={styles.placeName}>{props.place}</Text>
             </View>
@@ -40,9 +45,9 @@ export default function ExamItem(props) {
           </View>
           <View style={styles.icon}>
             <FontAwesomeIcon
-              size={90}
+              size={80}
               icon={faFileMedicalAlt}
-              color={'rgba(207, 207, 207, 0.8)'}
+              color={'rgba(173, 181, 189, 0.5)'}
             />
           </View>
         </View>
@@ -55,9 +60,9 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: '#fff',
     borderRadius: 5,
-    paddingTop: 15,
+    paddingTop: 18,
     paddingLeft: 15,
-    paddingBottom: 15,
+    paddingBottom: 18,
     flexDirection: 'row',
   },
   content: {
@@ -65,8 +70,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   icon: {
-    height: '100%',
-    width: '20%',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    width: '25%',
+  },
+  dateContainer: {
+    position: 'absolute',
+    flexDirection: 'row',
+    alignItems: 'center',
+    top: -10,
+    right: -90,
+  },
+  dateValue: {
+    fontSize: 11,
+    marginLeft: 5,
   },
   place: {
     flexDirection: 'row',
@@ -82,6 +99,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   button: {
+    marginLeft: 3,
     flexDirection: 'row',
     height: 30,
     width: 145,

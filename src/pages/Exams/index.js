@@ -45,13 +45,13 @@ export default class Exams extends React.Component {
           id: '1',
           name: 'Exame toxicológico',
           place: 'Laboratório São Marcos',
-          date: '25/05/2010',
+          date: '25/05/2019',
         },
         {
           id: '2',
           name: 'Exame de sangue',
           place: 'Laboratório São Marcos',
-          date: '25/05/2015',
+          date: '26/07/2018',
         },
       ],
     };
@@ -102,7 +102,6 @@ export default class Exams extends React.Component {
           </Body>
         </Header>
         <Searchbar
-          style={{ width: '98%' }}
           placeholder="Digite o nome do exame"
           onChangeText={query => {
             this.setState({ ...this.state, query });

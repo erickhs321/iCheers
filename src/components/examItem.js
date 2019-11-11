@@ -60,9 +60,9 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: '#fff',
     borderRadius: 5,
-    paddingTop: 18,
+    paddingTop: 20,
     paddingLeft: 15,
-    paddingBottom: 18,
+    paddingBottom: 16,
     flexDirection: 'row',
   },
   content: {

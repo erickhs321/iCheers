@@ -61,23 +61,22 @@ export default class MedicalRecord extends React.Component {
 
   render() {
     return (
-      <ScrollView>
+      <>
         {!this.state.readQrCode && (
           <QRCodeScanner
             onRead={this.onSuccess}
             showMarker={true}
-            checkAndroid6Permissions={true}
             cameraStyle={styles.cameraContainer}
           />
         )}
         {this.state.readQrCode && (
           <View style={styles.container}>
             <View style={styles.box}>
-            <Image source={this.state.avatarSource} style={styles.image}/>
-            <Text style={styles.listText}>{this.state.id}</Text>
-            <TouchableOpacity  style={styles.lernovamente} onPress={this.readAgain}>
-              <Text style={styles.text3}>Ler novamente</Text>
-            </TouchableOpacity>
+              <Image source={this.state.avatarSource} style={styles.image} />
+              <Text style={styles.listText}>{this.state.id}</Text>
+              <TouchableOpacity style={styles.lernovamente} onPress={this.readAgain}>
+                <Text style={styles.text3}>Ler novamente</Text>
+              </TouchableOpacity>
             </View>
           </View>
         )}
@@ -190,7 +189,7 @@ export default class MedicalRecord extends React.Component {
             <Picker.Item label="Uma vez por semana" value="onceAWeek" />
           </Picker>
         </View> */}
-      </ScrollView>
+      </>
     );
   }
 }
@@ -252,7 +251,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   listText: {
-    color:'white',
+    color: 'white',
     padding: 3,
   },
   select: {

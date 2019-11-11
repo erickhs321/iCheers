@@ -28,7 +28,7 @@ export default class Home extends React.Component {
     return (
       <>
         <Container style={{ flex: 1, justifyContent: 'center', marginBottom: 200 }}>
-          <Header style={{ backgroundColor: '#E64D57' }}>
+          <Header androidStatusBarColor="#d13d46" style={{ backgroundColor: "#E64D57" }}>
             <Body style={{ alignItems: 'center' }}>
               <Title>Início</Title>
             </Body>

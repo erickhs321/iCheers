@@ -91,7 +91,7 @@ export default class Exams extends React.Component {
   render() {
     return (
       <>
-        <Header style={{ backgroundColor: '#E64D57' }}>
+        <Header androidStatusBarColor="#d13d46" style={{ backgroundColor: "#E64D57" }}>
           <Body style={{ alignItems: 'center' }}>
             <Title>Exames</Title>
           </Body>

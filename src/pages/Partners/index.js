@@ -37,7 +37,9 @@ export default class Configuration extends React.Component {
   render() {
     return (
       <>
-        <Header androidStatusBarColor="#d13d46" style={{ backgroundColor: "#E64D57" }}>
+        <Header
+          androidStatusBarColor="#d13d46"
+          style={{ backgroundColor: '#E64D57' }}>
           <Body style={{ alignItems: 'center' }}>
             <Title>Parceiros</Title>
           </Body>

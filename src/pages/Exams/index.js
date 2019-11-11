@@ -91,7 +91,9 @@ export default class Exams extends React.Component {
   render() {
     return (
       <>
-        <Header androidStatusBarColor="#d13d46" style={{ backgroundColor: "#E64D57" }}>
+        <Header
+          androidStatusBarColor="#d13d46"
+          style={{ backgroundColor: '#E64D57' }}>
           <Body style={{ alignItems: 'center' }}>
             <Title>Exames</Title>
           </Body>
@@ -106,7 +108,7 @@ export default class Exams extends React.Component {
                   color={'#E64D57'}
                   style={styles.iconMargin}
                 />
-                <Text style={styles.filterButton}> Filtrar busca      </Text>
+                <Text style={styles.filterButton}> Filtrar busca </Text>
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.vaccineCardButton}>
@@ -116,7 +118,10 @@ export default class Exams extends React.Component {
                   color={'#252733'}
                   style={styles.iconMargin}
                 />
-                <Text style={styles.vaccineCardButton}> Ver cartão de vacina</Text>
+                <Text style={styles.vaccineCardButton}>
+                  {' '}
+                  Ver cartão de vacina
+                </Text>
               </TouchableOpacity>
             </View>
             <DataTable style={styles.table}>
@@ -149,7 +154,11 @@ export default class Exams extends React.Component {
 
                     <Text style={styles.tableTextSize}>
                       <TouchableOpacity style={styles.viewButton}>
-                        <FontAwesomeIcon size={14} icon={faEye} color={'#fff'} />
+                        <FontAwesomeIcon
+                          size={14}
+                          icon={faEye}
+                          color={'#fff'}
+                        />
                       </TouchableOpacity>
                     </Text>
                   </DataTable.Row>

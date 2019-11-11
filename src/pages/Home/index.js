@@ -6,7 +6,20 @@ import Quiz from '../../components/quiz';
 import { AreaChart, Grid } from 'react-native-svg-charts';
 import * as shape from 'd3-shape';
 import { Image, StatusBar } from 'react-native';
-import { Container, Title, Header, Content, Card, CardItem, Thumbnail, Button, Icon, Left, Body, Right } from 'native-base';
+import {
+  Container,
+  Title,
+  Header,
+  Content,
+  Card,
+  CardItem,
+  Thumbnail,
+  Button,
+  Icon,
+  Left,
+  Body,
+  Right,
+} from 'native-base';
 
 export default class Home extends React.Component {
   static navigationOptions = {
@@ -24,11 +37,14 @@ export default class Home extends React.Component {
   }
 
   render() {
-    const data = [50, 40, 40, 55, 43, 54, 60, 67, 45, 53, 53, 24, 50, 40, 50]
+    const data = [50, 40, 40, 55, 43, 54, 60, 67, 45, 53, 53, 24, 50, 40, 50];
     return (
       <>
-        <Container style={{ flex: 1, justifyContent: 'center', marginBottom: 200 }}>
-          <Header androidStatusBarColor="#d13d46" style={{ backgroundColor: "#E64D57" }}>
+        <Container
+          style={{ flex: 1, justifyContent: 'center', marginBottom: 200 }}>
+          <Header
+            androidStatusBarColor="#d13d46"
+            style={{ backgroundColor: '#E64D57' }}>
             <Body style={{ alignItems: 'center' }}>
               <Title>Início</Title>
             </Body>
@@ -41,12 +57,13 @@ export default class Home extends React.Component {
                 data={data}
                 contentInset={{ top: 50, bottom: 10 }}
                 curve={shape.curveNatural}
-                svg={{ fill: 'rgba(6, 125, 255, 0.8)' }}
-              >
+                svg={{ fill: 'rgba(6, 125, 255, 0.8)' }}>
                 <Grid />
               </AreaChart>
               <View style={styles.alinhamento}>
-                <Text style={styles.texto}>Variação de humor durante sua semana</Text>
+                <Text style={styles.texto}>
+                  Variação de humor durante sua semana
+                </Text>
               </View>
               <CardItem>
                 <Left>
@@ -70,7 +87,6 @@ export default class Home extends React.Component {
           <Quiz questions={this.state.questions} />
         </Container>
       </>
-
     );
   }
 }
@@ -99,5 +115,5 @@ const styles = StyleSheet.create({
   },
   alinhamento: {
     alignItems: 'center',
-  }
+  },
 });

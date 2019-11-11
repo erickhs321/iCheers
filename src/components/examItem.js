@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   placeName: {
-    fontSize: 13,
+    fontSize: 12,
     letterSpacing: 0.2,
     color: 'black',
     marginLeft: 10,
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     marginLeft: 3,
     flexDirection: 'row',
     height: 30,
-    width: 145,
+    width: 140,
     color: 'white',
     backgroundColor: '#00b386',
     borderRadius: 100,
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonText: {
-    fontSize: 12,
+    fontSize: 11,
     color: '#fff',
     marginLeft: 5,
   },
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     marginBottom: 7,
   },
   title: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '600',
     letterSpacing: 0.2,
     color: 'black',

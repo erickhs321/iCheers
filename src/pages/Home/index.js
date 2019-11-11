@@ -33,58 +33,73 @@ export default class Home extends React.Component {
     super(props);
     this.state = {
       questions: ['Você está bem?', 'Como vai hoje?', 'Teste?'] || [],
+      quizOpen: true,
     };
   }
+
+  toggleQuiz = () => {
+    this.setState({ quizOpen: false });
+  };
 
   render() {
     const data = [50, 40, 40, 55, 43, 54, 60, 67, 45, 53, 53, 24, 50, 40, 50];
     return (
       <>
+        <Header
+          androidStatusBarColor="#d13d46"
+          style={{ backgroundColor: '#E64D57' }}>
+          <Body style={{ alignItems: 'center' }}>
+            <Title>Início</Title>
+          </Body>
+        </Header>
         <Container
-          style={{ flex: 1, justifyContent: 'center', marginBottom: 200 }}>
-          <Header
-            androidStatusBarColor="#d13d46"
-            style={{ backgroundColor: '#E64D57' }}>
-            <Body style={{ alignItems: 'center' }}>
-              <Title>Início</Title>
-            </Body>
-          </Header>
-
-          <Content>
-            <Card>
-              <AreaChart
-                style={{ height: 200 }}
-                data={data}
-                contentInset={{ top: 50, bottom: 10 }}
-                curve={shape.curveNatural}
-                svg={{ fill: 'rgba(6, 125, 255, 0.8)' }}>
-                <Grid />
-              </AreaChart>
-              <View style={styles.alinhamento}>
-                <Text style={styles.texto}>
-                  Variação de humor durante sua semana
-                </Text>
-              </View>
-              <CardItem>
-                <Left>
-                  <Button transparent>
-                    <Text>Média: 50.8</Text>
-                  </Button>
-                </Left>
-                <Body>
-                  <Button transparent>
-                    <Text>Você está: </Text>
-                    <Icon active name="happy" />
-                    <Text> Feliz</Text>
-                  </Button>
-                </Body>
-                <Right>
-                  <Text>7 dias</Text>
-                </Right>
-              </CardItem>
-            </Card>
-          </Content>
-          <Quiz questions={this.state.questions} />
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            marginBottom: 200,
+          }}>
+          {!this.state.quizOpen && (
+            <Content>
+              <Card>
+                <AreaChart
+                  style={{ height: 200 }}
+                  data={data}
+                  contentInset={{ top: 50, bottom: 10 }}
+                  curve={shape.curveNatural}
+                  svg={{ fill: 'rgba(6, 125, 255, 0.8)' }}>
+                  <Grid />
+                </AreaChart>
+                <View style={styles.alinhamento}>
+                  <Text style={styles.texto}>
+                    Variação de humor durante sua semana
+                  </Text>
+                </View>
+                <CardItem>
+                  <Left>
+                    <Button transparent>
+                      <Text>Média: 50.8</Text>
+                    </Button>
+                  </Left>
+                  <Body>
+                    <Button transparent>
+                      <Text>Você está: </Text>
+                      <Icon active name="happy" />
+                      <Text> Feliz</Text>
+                    </Button>
+                  </Body>
+                  <Right>
+                    <Text>7 dias</Text>
+                  </Right>
+                </CardItem>
+              </Card>
+            </Content>
+          )}
+          {this.state.quizOpen && (
+            <Quiz
+              questions={this.state.questions}
+              toggleQuiz={this.toggleQuiz}
+            />
+          )}
         </Container>
       </>
     );

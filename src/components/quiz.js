@@ -6,7 +6,6 @@ export default class Quiz extends React.Component {
     super(props);
     this.state = {
       currentQuestion: 1,
-      visible: true,
     };
   }
 
@@ -26,86 +25,77 @@ export default class Quiz extends React.Component {
   }
 
   end() {
-    this.setState({
-      ...this.state,
-      visible: false,
-    });
+    this.props.toggleQuiz();
   }
 
   render() {
-    if (this.state.visible) {
-      return (
-        <View
-          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <View style={styles.box}>
-            <Text style={styles.text1}>
-              pergunta {this.state.currentQuestion}/
-              {this.props.questions.length}
-            </Text>
-            <Text style={styles.text2}>
-              {this.props.questions[this.state.currentQuestion - 1]}
-            </Text>
-            <View style={styles.icons}>
-              <TouchableOpacity>
-                <Image
-                  style={styles.iconsize}
-                  source={require('../assets/qsad.png')}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <Image
-                  style={styles.iconsize}
-                  source={require('../assets/qsad1.png')}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <Image
-                  style={styles.iconsize}
-                  source={require('../assets/qnormal.png')}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <Image
-                  style={styles.iconsize}
-                  source={require('../assets/qhappy.png')}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <Image
-                  style={styles.iconsize}
-                  source={require('../assets/qhappy1.png')}
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.containerButton}>
-              {this.state.currentQuestion > 1 && (
-                <TouchableOpacity
-                  onPress={() => this.previous()}
-                  style={styles.proxima}>
-                  <Text style={styles.text3}> Anterior </Text>
-                </TouchableOpacity>
-              )}
-
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <View style={styles.box}>
+          <Text style={styles.text1}>
+            pergunta {this.state.currentQuestion}/{this.props.questions.length}
+          </Text>
+          <Text style={styles.text2}>
+            {this.props.questions[this.state.currentQuestion - 1]}
+          </Text>
+          <View style={styles.icons}>
+            <TouchableOpacity>
+              <Image
+                style={styles.iconsize}
+                source={require('../assets/qsad.png')}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Image
+                style={styles.iconsize}
+                source={require('../assets/qsad1.png')}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Image
+                style={styles.iconsize}
+                source={require('../assets/qnormal.png')}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Image
+                style={styles.iconsize}
+                source={require('../assets/qhappy.png')}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Image
+                style={styles.iconsize}
+                source={require('../assets/qhappy1.png')}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.containerButton}>
+            {this.state.currentQuestion > 1 && (
               <TouchableOpacity
-                onPress={
-                  this.state.currentQuestion === this.props.questions.length
-                    ? () => this.end()
-                    : () => this.next()
-                }
+                onPress={() => this.previous()}
                 style={styles.proxima}>
-                <Text style={styles.text3}>
-                  {this.state.currentQuestion === this.props.questions.length
-                    ? 'Finalizar'
-                    : 'Próxima'}
-                </Text>
+                <Text style={styles.text3}> Anterior </Text>
               </TouchableOpacity>
-            </View>
+            )}
+
+            <TouchableOpacity
+              onPress={
+                this.state.currentQuestion === this.props.questions.length
+                  ? () => this.end()
+                  : () => this.next()
+              }
+              style={styles.proxima}>
+              <Text style={styles.text3}>
+                {this.state.currentQuestion === this.props.questions.length
+                  ? 'Finalizar'
+                  : 'Próxima'}
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
-      );
-    } else {
-      return false;
-    }
+      </View>
+    );
   }
 }
 

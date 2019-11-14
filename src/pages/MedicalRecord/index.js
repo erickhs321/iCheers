@@ -3,28 +3,13 @@ import {
   StyleSheet,
   View,
   Text,
-  TextInput,
   TouchableOpacity,
-  Image,
-  ScrollView,
-  Picker,
   Dimensions,
 } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import {
-  faPlus,
-  faTrashAlt,
-  faNotesMedical,
-} from '@fortawesome/free-solid-svg-icons';
-import ImagePicker from 'react-native-image-picker';
-import QRCodeScanner from 'react-native-qrcode-scanner';
-import { white } from 'ansi-colors';
-
-const options = {
-  title: 'Selecionar foto',
-  takePhotoButtonTitle: 'Tirar foto',
-  chooseFromLibraryButtonTitle: 'Escolher foto da galeria',
-};
+import { faNotesMedical } from '@fortawesome/free-solid-svg-icons';
+import { Body, Header, Title, Fab, Icon, Button } from 'native-base';
+import { QRScannerView } from 'react-native-qrcode-scanner-view';
 
 export default class MedicalRecord extends React.Component {
   state = {
@@ -42,7 +27,23 @@ export default class MedicalRecord extends React.Component {
     diseases: ['Rubeola', 'Diabetes', 'Glaucoma', 'Anemia'],
     frequency: '',
     readQrCode: false,
+    displayQrCodeReader: true,
+    focusedScreen: true,
   };
+
+  componentDidMount() {
+    const { navigation } = this.props;
+    navigation.addListener('willFocus', () =>
+      this.setState({ focusedScreen: true, readQrCode: false }),
+    );
+    navigation.addListener('willBlur', () =>
+      this.setState({
+        ...this.state,
+        focusedScreen: false,
+        displayQrCodeReader: false,
+      }),
+    );
+  }
 
   static navigationOptions = {
     tabBarLabel: 'Prontuário',
@@ -51,8 +52,11 @@ export default class MedicalRecord extends React.Component {
     ),
   };
 
-  onSuccess = async e => {
-    await this.setState({ id: e.data, readQrCode: true });
+  onRead = e => {
+    this.setState({
+      id: e.data,
+      readQrCode: true,
+    });
   };
 
   readAgain = () => {
@@ -62,133 +66,27 @@ export default class MedicalRecord extends React.Component {
   render() {
     return (
       <>
-        {!this.state.readQrCode && (
-          <QRCodeScanner
-            onRead={this.onSuccess}
-            showMarker={true}
-            cameraStyle={styles.cameraContainer}
-          />
-        )}
-        {this.state.readQrCode && (
-          <View style={styles.container}>
-            <View style={styles.box}>
-              <Image source={this.state.avatarSource} style={styles.image} />
-              <Text style={styles.listText}>{this.state.id}</Text>
-              <TouchableOpacity style={styles.lernovamente} onPress={this.readAgain}>
-                <Text style={styles.text3}>Ler novamente</Text>
-              </TouchableOpacity>
-            </View>
+        {this.state.focusedScreen && this.state.readQrCode && (
+          <View>
+            <Header
+              androidStatusBarColor="#d13d46"
+              style={{ backgroundColor: '#E64D57' }}>
+              <Body style={{ alignItems: 'center' }}>
+                <Title>Prontuário</Title>
+              </Body>
+            </Header>
+            <Text>{this.state.id}</Text>
           </View>
         )}
-
-        {/* <View style={styles.container}>
-          <Text style={styles.major}>Prontuário</Text>
-          <Image source={this.state.avatarSource} style={styles.image} />
-          <Text style={styles.title}>Nome</Text>
-          <TextInput
-            value={this.state.name}
-            onChangeText={name => this.setState({ name })}
-            style={styles.input}
-          />
-          <Text style={styles.title}>Altura</Text>
-          <TextInput
-            value={this.state.height}
-            onChangeText={height => this.setState({ height })}
-            style={styles.input}
-          />
-          <Text style={styles.title}>Peso(kg)</Text>
-          <TextInput
-            value={this.state.weight}
-            onChangeText={weight => this.setState({ weight })}
-            style={styles.input}
-          />
-          <Text style={styles.title}>Data de Nascimento</Text>
-          <TextInput
-            value={this.state.dateOfBirth}
-            onChangeText={dateOfBirth => this.setState({ dateOfBirth })}
-            style={styles.input}
-          />
-          <Text style={styles.title}>Tipo Sanguíneo</Text>
-          <TextInput
-            value={this.state.bloodType}
-            onChangeText={bloodType => this.setState({ bloodType })}
-            style={styles.input}
-          />
-          <View style={styles.title}>
-            <Text style={styles.title}>Doenças</Text>
-            <TouchableOpacity>
-              <FontAwesomeIcon
-                style={styles.iconMargin}
-                size={18}
-                icon={faPlus}
-                color={'#01D300'}
-              />
-            </TouchableOpacity>
+        {this.state.focusedScreen && !this.state.readQrCode && (
+          <View style={{ flex: 1 }}>
+            <QRScannerView
+              onScanResult={this.onRead}
+              hintText="Escaneie o qr code do paciente"
+              scanBarAnimateReverse={true}
+            />
           </View>
-          <View style={styles.list}>
-            {this.state.diseases.map((disease, index) => {
-              return (
-                <View key={index} style={styles.listItem}>
-                  <Text style={styles.listText}>- {disease}</Text>
-                  <TouchableOpacity>
-                    <FontAwesomeIcon
-                      style={styles.iconMargin}
-                      size={12}
-                      icon={faTrashAlt}
-                      color={'#E64D57'}
-                    />
-                  </TouchableOpacity>
-                </View>
-              );
-            })}
-          </View>
-          <Text style={styles.title}>Consumo de bebidas alcoolicas</Text>
-          <TextInput
-            value={this.state.drink}
-            onChangeText={encryptionKey => this.setState({ drink })}
-            style={styles.input}
-          />
-          <Text style={styles.title}>Cigarros</Text>
-          <TextInput
-            value={this.state.cigarets}
-            onChangeText={encryptionKey => this.setState({ cigarets })}
-            style={styles.input}
-          />
-          <Text style={styles.title}>Substancias Pscicoativas</Text>
-          <TextInput
-            value={this.state.psychoactive}
-            onChangeText={encryptionKey => this.setState({ psychoactive })}
-            style={styles.input}
-          />
-          <Text style={styles.title}>Avaliação Cardiorespiratória</Text>
-          <TextInput
-            value={this.state.cardiorespiratory}
-            onChangeText={encryptionKey => this.setState({ cardiorespiratory })}
-            style={styles.input}
-          />
-          <Text style={styles.title}>Mobilidade</Text>
-          <TextInput
-            value={this.state.mobility}
-            onChangeText={encryptionKey => this.setState({ mobility })}
-            style={styles.input}
-          />
-          <Text style={styles.title}>Deficiência</Text>
-          <TextInput
-            value={this.state.deficiency}
-            onChangeText={encryptionKey => this.setState({ deficiency })}
-            style={styles.input}
-          />
-          <Text style={styles.title}>Pratica exercícios físicos</Text>
-          <Picker
-            selectedValue={this.state.frequency}
-            style={styles.select}
-            onValueChange={(itemValue, itemIndex) =>
-              this.setState({ frequency: itemValue })
-            }>
-            <Picker.Item label="Todos os Dias" value="everyday" />
-            <Picker.Item label="Uma vez por semana" value="onceAWeek" />
-          </Picker>
-        </View> */}
+        )}
       </>
     );
   }
@@ -196,12 +94,26 @@ export default class MedicalRecord extends React.Component {
 
 const styles = StyleSheet.create({
   cameraContainer: {
+    flex: 0,
     height: Dimensions.get('window').height,
+  },
+  scanQrCodeButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   container: {
     alignItems: 'center',
     padding: 40,
     width: '100%',
+  },
+  cancelButton: {
+    borderRadius: 5,
+    width: 100,
+    height: 35,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: '#FFF',
   },
   box: {
     padding: 10,

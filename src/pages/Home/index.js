@@ -5,7 +5,8 @@ import { faHome } from '@fortawesome/free-solid-svg-icons';
 import Quiz from '../../components/quiz';
 import { AreaChart, Grid } from 'react-native-svg-charts';
 import * as shape from 'd3-shape';
-import { Image, StatusBar } from 'react-native';
+import { Image, StatusBar, Dimensions } from 'react-native';
+import Timeline from 'react-native-timeline-flatlist';
 import {
   Container,
   Title,
@@ -32,9 +33,52 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      questions: ['Você está bem?', 'Como vai hoje?', 'Teste?'] || [],
+      questions: ['Como você se sente hoje?'] || [],
       quizOpen: true,
     };
+
+    this.data = [
+      {
+        time: '18/11/2018',
+        title: 'Archery Training',
+        lineColor: '#009688',
+        icon: require('../../assets/qsad.png'),
+        imageUrl:
+          'https://cloud.githubusercontent.com/assets/21040043/24240340/c0f96b3a-0fe3-11e7-8964-fe66e4d9be7a.jpg',
+      },
+      {
+        time: '19/11/2018',
+        title: 'Play Badminton',
+        description:
+          'Badminton is a racquet sport played using racquets to hit a shuttlecock across a net.',
+        icon: require('../../assets/qsad.png'),
+        imageUrl:
+          'https://cloud.githubusercontent.com/assets/21040043/24240405/0ba41234-0fe4-11e7-919b-c3f88ced349c.jpg',
+      },
+      {
+        time: '20/11/2018',
+        title: 'Lunch',
+        icon: require('../../assets/qsad.png'),
+      },
+      {
+        time: '21/11/2018',
+        title: 'Watch Soccer',
+        description:
+          'Team sport played between two teams of eleven players with a spherical ball. ',
+        lineColor: '#009688',
+        icon: require('../../assets/qsad.png'),
+        imageUrl:
+          'https://cloud.githubusercontent.com/assets/21040043/24240419/1f553dee-0fe4-11e7-8638-6025682232b1.jpg',
+      },
+      {
+        time: '22/11/2018',
+        title: 'Go to Fitness center',
+        description: 'Look out for the Best Gym & Fitness Centers around me :)',
+        icon: require('../../assets/qsad.png'),
+        imageUrl:
+          'https://cloud.githubusercontent.com/assets/21040043/24240422/20d84f6c-0fe4-11e7-8f1d-9dbc594d0cfa.jpg',
+      },
+    ];
   }
 
   toggleQuiz = () => {
@@ -56,10 +100,33 @@ export default class Home extends React.Component {
           style={{
             flex: 1,
             justifyContent: 'center',
-            marginBottom: 200,
+            alignItems: 'center',
+            height: Dimensions.get('window').height,
           }}>
           {!this.state.quizOpen && (
-            <Content>
+            <Content style={{ width: '95%' }}>
+              <Card>
+                <Timeline
+                  columnFormat="two-column"
+                  data={this.data}
+                  circleSize={20}
+                  circleColor="rgba(0,0,0,0)"
+                  lineColor="rgb(45,156,219)"
+                  timeContainerStyle={{ minWidth: 52, marginTop: -5 }}
+                  timeStyle={{
+                    textAlign: 'center',
+                    backgroundColor: '#ff9797',
+                    color: 'white',
+                    padding: 5,
+                    borderRadius: 13,
+                  }}
+                  descriptionStyle={{ color: 'gray' }}
+                  options={{
+                    style: { paddingTop: 5 },
+                  }}
+                  innerCircle={'icon'}
+                />
+              </Card>
               <Card>
                 <AreaChart
                   style={{ height: 200 }}

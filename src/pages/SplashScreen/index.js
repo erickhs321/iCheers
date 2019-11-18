@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
+import { Header } from 'native-base';
 
 import { getUserToken } from '../../services/async-storage';
 
@@ -27,11 +28,16 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.logoContainer}>
-          <Image source={require('../../assets/splash.png')} />
+      <>
+        <Header
+          androidStatusBarColor="#d13d46"
+          style={{ backgroundColor: '#E64D57' }}></Header>
+        <View style={styles.container}>
+          <View style={styles.logoContainer}>
+            <Image source={require('../../assets/splash.png')} />
+          </View>
         </View>
-      </View>
+      </>
     );
   }
 }

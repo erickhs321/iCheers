@@ -1,26 +1,93 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Platform,
+  AppRegistry,
+} from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import Quiz from '../../components/quiz';
 import { AreaChart, Grid } from 'react-native-svg-charts';
 import * as shape from 'd3-shape';
-import { Image, StatusBar, Dimensions } from 'react-native';
 import Timeline from 'react-native-timeline-flatlist';
-import {
-  Container,
-  Title,
-  Header,
-  Content,
-  Card,
-  CardItem,
-  Thumbnail,
-  Button,
-  Icon,
-  Left,
-  Body,
-  Right,
-} from 'native-base';
+import { Container, Title, Header, Content, Card, Body } from 'native-base';
+import FusionCharts from 'react-native-fusioncharts';
+
+const dataSource = {
+  chart: {
+    caption: 'Informações sobre saúde',
+    scrollheight: '10',
+    numvisibleplot: '10',
+    drawcrossline: '1',
+    theme: 'fusion',
+  },
+  categories: [
+    {
+      category: [
+        {
+          label: 'Set',
+        },
+        {
+          label: 'Out',
+        },
+        {
+          label: 'Nov',
+        },
+      ],
+    },
+  ],
+  dataset: [
+    {
+      seriesname: 'Altura',
+      plottooltext: 'Altura: $dataValuem',
+      data: [
+        {
+          value: '1.72',
+        },
+        {
+          value: '1.72',
+        },
+        {
+          value: '1.72',
+        },
+      ],
+    },
+    {
+      seriesname: 'Peso',
+      plottooltext: 'Peso: $dataValuekg',
+      data: [
+        {
+          value: '60',
+        },
+        {
+          value: '65',
+        },
+        {
+          value: '70.5',
+        },
+      ],
+    },
+    {
+      seriesname: 'Imc',
+      renderAs: 'line',
+      plottooltext: 'Imc: $dataValue',
+      data: [
+        {
+          value: '18',
+        },
+        {
+          value: '20',
+        },
+        {
+          value: '22',
+        },
+      ],
+    },
+  ],
+};
 
 export default class Home extends React.Component {
   static navigationOptions = {
@@ -32,10 +99,17 @@ export default class Home extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = { dataSource };
+    console.log(this.state);
     this.state = {
+      ...this.state,
       questions: ['Como você se sente hoje?'] || [],
       quizOpen: true,
     };
+
+    this.libraryPath = Platform.select({
+      android: { uri: 'file:///android_asset/fusioncharts.html' },
+    });
 
     this.data = [
       {
@@ -86,7 +160,6 @@ export default class Home extends React.Component {
   };
 
   render() {
-    const data = [50, 40, 40, 55, 43, 54, 60, 67, 45, 53, 53, 24, 50, 40, 50];
     return (
       <>
         <Header
@@ -96,6 +169,7 @@ export default class Home extends React.Component {
             <Title>Início</Title>
           </Body>
         </Header>
+
         <Container
           style={{
             flex: 1,
@@ -128,36 +202,13 @@ export default class Home extends React.Component {
                 />
               </Card>
               <Card>
-                <AreaChart
-                  style={{ height: 200 }}
-                  data={data}
-                  contentInset={{ top: 50, bottom: 10 }}
-                  curve={shape.curveNatural}
-                  svg={{ fill: 'rgba(6, 125, 255, 0.8)' }}>
-                  <Grid />
-                </AreaChart>
-                <View style={styles.alinhamento}>
-                  <Text style={styles.texto}>
-                    Variação de humor durante sua semana
-                  </Text>
-                </View>
-                <CardItem>
-                  <Left>
-                    <Button transparent>
-                      <Text>Média: 50.8</Text>
-                    </Button>
-                  </Left>
-                  <Body>
-                    <Button transparent>
-                      <Text>Você está: </Text>
-                      <Icon active name="happy" />
-                      <Text> Feliz</Text>
-                    </Button>
-                  </Body>
-                  <Right>
-                    <Text>7 dias</Text>
-                  </Right>
-                </CardItem>
+                <FusionCharts
+                  type="stackedcolumn2dline"
+                  width={'100%'}
+                  height={300}
+                  dataSource={this.state.dataSource}
+                  libraryPath={this.libraryPath} // set the libraryPath property
+                />
               </Card>
             </Content>
           )}
@@ -178,17 +229,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 40,
     width: '95%',
-  },
-  grafico: {
-    marginTop: 200,
-  },
-  cardhumor: {
-    width: 300,
-    height: 260,
-    backgroundColor: '#363740',
-    alignItems: 'center',
-    borderRadius: 5,
-    marginBottom: 100,
   },
   texto: {
     fontStyle: 'normal',

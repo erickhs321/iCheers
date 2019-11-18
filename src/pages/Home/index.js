@@ -10,15 +10,13 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import Quiz from '../../components/quiz';
-import { AreaChart, Grid } from 'react-native-svg-charts';
-import * as shape from 'd3-shape';
 import Timeline from 'react-native-timeline-flatlist';
 import { Container, Title, Header, Content, Card, Body } from 'native-base';
 import FusionCharts from 'react-native-fusioncharts';
 
 const dataSource = {
   chart: {
-    caption: 'Informações sobre saúde',
+    caption: 'Informações sobre sua saúde',
     scrollheight: '10',
     numvisibleplot: '10',
     drawcrossline: '1',
@@ -114,43 +112,34 @@ export default class Home extends React.Component {
     this.data = [
       {
         time: '18/11/2018',
-        title: 'Archery Training',
-        lineColor: '#009688',
+        title: 'Motivo',
         icon: require('../../assets/qsad.png'),
-        imageUrl:
-          'https://cloud.githubusercontent.com/assets/21040043/24240340/c0f96b3a-0fe3-11e7-8964-fe66e4d9be7a.jpg',
+        description: 'Bati com meu dedinho na quina da mesa',
       },
       {
         time: '19/11/2018',
-        title: 'Play Badminton',
-        description:
-          'Badminton is a racquet sport played using racquets to hit a shuttlecock across a net.',
-        icon: require('../../assets/qsad.png'),
-        imageUrl:
-          'https://cloud.githubusercontent.com/assets/21040043/24240405/0ba41234-0fe4-11e7-919b-c3f88ced349c.jpg',
+        title: 'Motivo',
+        description: 'Hoje o dia foi muito agradável.',
+        icon: require('../../assets/qhappy1.png'),
       },
       {
         time: '20/11/2018',
-        title: 'Lunch',
-        icon: require('../../assets/qsad.png'),
+        title: 'Motivo',
+        description: 'O dia foi normal',
+        icon: require('../../assets/qnormal.png'),
       },
       {
         time: '21/11/2018',
-        title: 'Watch Soccer',
-        description:
-          'Team sport played between two teams of eleven players with a spherical ball. ',
-        lineColor: '#009688',
+        title: 'Motivo',
+        description: 'Motivo não informado',
+
         icon: require('../../assets/qsad.png'),
-        imageUrl:
-          'https://cloud.githubusercontent.com/assets/21040043/24240419/1f553dee-0fe4-11e7-8638-6025682232b1.jpg',
       },
       {
         time: '22/11/2018',
-        title: 'Go to Fitness center',
-        description: 'Look out for the Best Gym & Fitness Centers around me :)',
-        icon: require('../../assets/qsad.png'),
-        imageUrl:
-          'https://cloud.githubusercontent.com/assets/21040043/24240422/20d84f6c-0fe4-11e7-8f1d-9dbc594d0cfa.jpg',
+        title: 'Motivo',
+        description: 'O dia foi produtivo',
+        icon: require('../../assets/qhappy.png'),
       },
     ];
   }
@@ -179,22 +168,40 @@ export default class Home extends React.Component {
           }}>
           {!this.state.quizOpen && (
             <Content style={{ width: '95%' }}>
-              <Card>
+              <Card style={{ padding: 15 }}>
+                <Text
+                  style={{
+                    color: '#363740',
+                    opacity: 0.8,
+                    textAlign: 'center',
+                    fontSize: 17,
+                    fontWeight: 'bold',
+                    marginTop: 10,
+                    marginBottom: 20,
+                  }}>
+                  Informações sobre o seu humor
+                </Text>
                 <Timeline
                   columnFormat="two-column"
                   data={this.data}
-                  circleSize={20}
-                  circleColor="rgba(0,0,0,0)"
-                  lineColor="rgb(45,156,219)"
-                  timeContainerStyle={{ minWidth: 52, marginTop: -5 }}
+                  circleSize={30}
+                  circleColor="#fff"
+                  lineColor="#00b386"
+                  timeContainerStyle={{ minWidth: 52, marginTop: 0 }}
                   timeStyle={{
                     textAlign: 'center',
-                    backgroundColor: '#ff9797',
+                    backgroundColor: 'rgb(45,156,219)',
+                    fontSize: 12.5,
                     color: 'white',
-                    padding: 5,
+                    padding: 7,
                     borderRadius: 13,
                   }}
-                  descriptionStyle={{ color: 'gray' }}
+                  descriptionStyle={{
+                    color: '#363740',
+                    backgroundColor: '#e3e4e6',
+                    padding: 10,
+                    borderRadius: 10,
+                  }}
                   options={{
                     style: { paddingTop: 5 },
                   }}
@@ -205,7 +212,7 @@ export default class Home extends React.Component {
                 <FusionCharts
                   type="stackedcolumn2dline"
                   width={'100%'}
-                  height={300}
+                  height={350}
                   dataSource={this.state.dataSource}
                   libraryPath={this.libraryPath} // set the libraryPath property
                 />

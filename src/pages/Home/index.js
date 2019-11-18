@@ -175,7 +175,7 @@ export default class Home extends React.Component {
               <View
                 style={{
                   alignItems: 'center',
-                  backgroundColor: 'rgba(45,156,219, 0.1)',
+                  backgroundColor: 'rgba(54, 55, 64, 0.05)',
                   marginBottom: 15,
                   padding: 10,
                 }}>

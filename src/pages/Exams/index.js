@@ -123,11 +123,11 @@ export default class Exams extends React.Component {
                 ))}
             </View>
 
-            <Image
+            {/* <Image
               source={this.state.avatarSource}
               style={{ width: 200, height: 200, margin: 10, padding: 10 }}
             />
-            <Text style>{this.state.text}</Text>
+            <Text style>{this.state.text}</Text> */}
           </View>
         </ScrollView>
         <Fab

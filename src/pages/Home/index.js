@@ -175,7 +175,7 @@ export default class Home extends React.Component {
               <View
                 style={{
                   alignItems: 'center',
-                  backgroundColor: 'rgba(54, 55, 64, 0.05)',
+                  backgroundColor: 'rgba(45,156,219, 0.05)',
                   marginBottom: 15,
                   padding: 10,
                 }}>
@@ -195,15 +195,6 @@ export default class Home extends React.Component {
                 </View>
               </View>
 
-              <Card>
-                <FusionCharts
-                  type="stackedcolumn2dline"
-                  width={'100%'}
-                  height={350}
-                  dataSource={this.state.dataSource}
-                  libraryPath={this.libraryPath}
-                />
-              </Card>
               <Card style={{ padding: 15, marginTop: 20 }}>
                 <Text
                   style={{
@@ -239,6 +230,15 @@ export default class Home extends React.Component {
                     borderRadius: 10,
                   }}
                   innerCircle={'icon'}
+                />
+              </Card>
+              <Card>
+                <FusionCharts
+                  type="stackedcolumn2dline"
+                  width={'100%'}
+                  height={350}
+                  dataSource={this.state.dataSource}
+                  libraryPath={this.libraryPath}
                 />
               </Card>
             </Content>

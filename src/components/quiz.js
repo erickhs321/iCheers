@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#00b386',
     width: 105,
     height: 30,
-    borderRadius: 10,
+    borderRadius: 5,
   },
   iconsize: {
     width: 40,

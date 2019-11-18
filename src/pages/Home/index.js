@@ -13,6 +13,7 @@ import Quiz from '../../components/quiz';
 import Timeline from 'react-native-timeline-flatlist';
 import { Container, Title, Header, Content, Card, Body } from 'native-base';
 import FusionCharts from 'react-native-fusioncharts';
+import { Avatar } from 'react-native-paper';
 
 const dataSource = {
   chart: {
@@ -151,24 +152,53 @@ export default class Home extends React.Component {
   render() {
     return (
       <>
-        <Header
-          androidStatusBarColor="#d13d46"
-          style={{ backgroundColor: '#E64D57' }}>
-          <Body style={{ alignItems: 'center' }}>
-            <Title>Início</Title>
-          </Body>
-        </Header>
+        <Header androidStatusBarColor="#d13d46" style={{ height: 0 }}></Header>
 
         <Container
           style={{
-            flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
             height: Dimensions.get('window').height,
+            backgroundColor: 'rgba(45,156,219, 0)',
           }}>
           {!this.state.quizOpen && (
-            <Content style={{ width: '95%' }}>
-              <Card style={{ padding: 15 }}>
+            <Content
+              style={{
+                width: '95%',
+                paddingTop: 30,
+                marginBottom: 30,
+                height: Dimensions.get('window').height,
+              }}>
+              <View
+                style={{
+                  alignItems: 'center',
+                }}>
+                <View
+                  style={{
+                    backgroundColor: 'rgba(1, 211, 0, 0.4)',
+                    width: 165,
+                    height: 165,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderRadius: 180,
+                  }}>
+                  <Avatar.Image
+                    size={150}
+                    source={require('../../assets/picture.png')}
+                  />
+                </View>
+              </View>
+
+              <Card>
+                <FusionCharts
+                  type="stackedcolumn2dline"
+                  width={'100%'}
+                  height={350}
+                  dataSource={this.state.dataSource}
+                  libraryPath={this.libraryPath} // set the libraryPath property
+                />
+              </Card>
+              <Card style={{ padding: 15, marginTop: 20 }}>
                 <Text
                   style={{
                     color: '#363740',
@@ -202,19 +232,7 @@ export default class Home extends React.Component {
                     padding: 10,
                     borderRadius: 10,
                   }}
-                  options={{
-                    style: { paddingTop: 5 },
-                  }}
                   innerCircle={'icon'}
-                />
-              </Card>
-              <Card>
-                <FusionCharts
-                  type="stackedcolumn2dline"
-                  width={'100%'}
-                  height={350}
-                  dataSource={this.state.dataSource}
-                  libraryPath={this.libraryPath} // set the libraryPath property
                 />
               </Card>
             </Content>

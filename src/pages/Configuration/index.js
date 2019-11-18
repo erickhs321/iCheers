@@ -28,15 +28,16 @@ export default class Configuration extends React.Component {
   state = {
     email: 'erickhenrique321@gmail.com',
     password: '123456',
-    height: '',
-    weight: '',
+    height: '1.72m',
+    weight: '60kg',
     dateOfBirth: '',
     bloodType: 'O+',
     diseases: ['Rubeola', 'Diabetes'],
     profiles: ['Carla', 'Maria'],
     devices: ['Lenovo k6'],
-    frequency: '',
+    frequency: '1',
     encryptionKey: 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
+    avatarSource: require('../../assets/picture.png'),
   };
 
   static navigationOptions = {
@@ -244,9 +245,9 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   image: {
-    width: 92,
-    height: 94,
-    borderRadius: 100,
+    width: 150,
+    height: 150,
+    borderRadius: 150,
     backgroundColor: 'grey',
   },
   title: {

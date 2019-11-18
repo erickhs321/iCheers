@@ -31,7 +31,8 @@ export default class Login extends React.Component {
       <>
         <Header
           androidStatusBarColor="#d13d46"
-          style={{ backgroundColor: '#E64D57' }}></Header>
+          style={{ backgroundColor: '#E64D57', height: 0 }}
+        />
         <View style={styles.container}>
           <View style={styles.logoContainer}>
             <Image source={require('../../assets/splash.png')} />

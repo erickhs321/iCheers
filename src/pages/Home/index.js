@@ -156,6 +156,8 @@ export default class Home extends React.Component {
 
         <Container
           style={{
+            flex: 1,
+            padding: 10,
             justifyContent: 'center',
             alignItems: 'center',
             height: Dimensions.get('window').height,
@@ -164,14 +166,18 @@ export default class Home extends React.Component {
           {!this.state.quizOpen && (
             <Content
               style={{
+                flex: 1,
                 width: '95%',
-                paddingTop: 30,
+                paddingTop: 20,
                 marginBottom: 30,
                 height: Dimensions.get('window').height,
               }}>
               <View
                 style={{
                   alignItems: 'center',
+                  backgroundColor: 'rgba(45,156,219, 0.1)',
+                  marginBottom: 15,
+                  padding: 10,
                 }}>
                 <View
                   style={{
@@ -195,7 +201,7 @@ export default class Home extends React.Component {
                   width={'100%'}
                   height={350}
                   dataSource={this.state.dataSource}
-                  libraryPath={this.libraryPath} // set the libraryPath property
+                  libraryPath={this.libraryPath}
                 />
               </Card>
               <Card style={{ padding: 15, marginTop: 20 }}>

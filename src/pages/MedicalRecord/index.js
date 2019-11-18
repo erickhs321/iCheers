@@ -9,7 +9,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faNotesMedical } from '@fortawesome/free-solid-svg-icons';
 import { Body, Header, Title, Fab, Icon, Button } from 'native-base';
-import { QRScannerView } from 'react-native-qrcode-scanner-view';
+import QRCodeScanner from 'react-native-qrcode-scanner';
 
 export default class MedicalRecord extends React.Component {
   state = {
@@ -38,7 +38,6 @@ export default class MedicalRecord extends React.Component {
     );
     navigation.addListener('willBlur', () =>
       this.setState({
-        ...this.state,
         focusedScreen: false,
         displayQrCodeReader: false,
       }),
@@ -79,13 +78,12 @@ export default class MedicalRecord extends React.Component {
           </View>
         )}
         {this.state.focusedScreen && !this.state.readQrCode && (
-          <View style={{ flex: 1 }}>
-            <QRScannerView
-              onScanResult={this.onRead}
-              hintText="Escaneie o qr code do paciente"
-              scanBarAnimateReverse={true}
-            />
-          </View>
+          <QRCodeScanner
+            cameraStyle={styles.cameraContainer}
+            onRead={this.onRead}
+            showMarker={true}
+            checkAndroid6Permissions={true}
+          />
         )}
       </>
     );

@@ -9,10 +9,6 @@ export default class Login extends React.Component {
     this.initializer();
   }
 
-  static navigationOptions = {
-    drawerLabel: 'Login',
-  };
-
   state = {
     user: '',
     password: '',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Loggin } from '../../services/api';
+import { auth } from '../../services/api';
 import {
   StyleSheet,
   Text,
@@ -9,21 +9,33 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-
 export default class Login extends React.Component {
-  static navigationOptions = {
-    drawerLabel: 'Login',
+  static navigationOptions = () => {
+    return {
+      header: () => null,
+    };
   };
 
   state = {
-    user: '',
-    password: '',
+    email: 'erickhenrique321@gmail.com',
+    password: '123456',
   };
 
   login = async () => {
-    Loggin(this.state.user, this.state.password).then(
-      this.props.navigation.navigate('Home')
-    ).catch(console.log(error))
+    try {
+      if (!this.state.email || !this.state.password) {
+        throw 'Insira todos os dados';
+      } else {
+        const res = await auth(this.state.email, this.state.password);
+        if (res.error) {
+          throw 'Usuário ou senha incorretos';
+        } else {
+          this.props.navigation.navigate('Home');
+        }
+      }
+    } catch (error) {
+      this.setState({ ...this.state, error });
+    }
   };
 
   register = () => {
@@ -33,6 +45,12 @@ export default class Login extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        {this.state.error && (
+          <View style={styles.errorAlert}>
+            <Text style={styles.errorAlertText}>{this.state.error}</Text>
+          </View>
+        )}
+
         <View style={styles.logoContainer}>
           <Image source={require('../../assets/logo.png')} />
           <Text style={styles.title}>iCheers</Text>
@@ -40,8 +58,8 @@ export default class Login extends React.Component {
 
         <TextInput
           style={styles.input}
-          onChangeText={user => this.setState({ user })}
-          value={this.state.user}
+          onChangeText={email => this.setState({ email })}
+          value={this.state.email}
           placeholder="Login"
           placeholderTextColor="#363740"
         />
@@ -58,13 +76,6 @@ export default class Login extends React.Component {
           <TouchableOpacity style={styles.loginButton} onPress={this.login}>
             <Text style={styles.buttonText}>Entrar</Text>
           </TouchableOpacity>
-          <Text style={styles.textOrLoginWith}> ou entrar com:</Text>
-          <TouchableOpacity onPress={this.login}>
-            <Image source={require('../../assets/google.png')} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.login} style={styles.facebookButton}>
-            <Image source={require('../../assets/facebook.png')} />
-          </TouchableOpacity>
         </View>
         <View style={styles.forgotPasswordContainer}>
           <TouchableOpacity>
@@ -80,10 +91,28 @@ export default class Login extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  errorAlert: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 4,
+    height: 35,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: '#f8d7da',
+    borderColor: '#f5c6cb',
+    borderWidth: 1,
+  },
+  errorAlertText: {
+    fontSize: 11.5,
+    color: '#721c24',
+  },
   container: {
     alignItems: 'center',
     padding: 40,
-    width: '95%',
+    paddingTop: 60,
+    width: '100%',
   },
 
   title: {
@@ -101,11 +130,12 @@ const styles = StyleSheet.create({
 
   input: {
     width: '100%',
+    height: 50,
     borderBottomColor: '#363740',
     borderBottomWidth: 1.1,
     paddingLeft: 0,
-    fontSize: 14,
-    paddingBottom: 10.5,
+    fontSize: 16,
+    paddingBottom: 15,
     marginBottom: 20,
   },
 
@@ -117,8 +147,8 @@ const styles = StyleSheet.create({
   },
 
   loginButton: {
-    width: '40%',
-    height: 34,
+    width: '100%',
+    height: 45,
     fontSize: 13,
     backgroundColor: '#363740',
     borderRadius: 16,
@@ -133,17 +163,12 @@ const styles = StyleSheet.create({
   },
 
   textOrLoginWith: {
-    fontSize: 12,
+    fontSize: 1,
     letterSpacing: 0.4,
     color: '#C2C1C1',
     fontWeight: '500',
     marginLeft: 15,
     marginRight: 15,
-  },
-
-  facebookButton: {
-    marginLeft: 12,
-    marginRight: 12,
   },
 
   forgotPasswordContainer: {
@@ -155,13 +180,13 @@ const styles = StyleSheet.create({
 
   forgotPasswordText: {
     color: '#363740',
-    fontSize: 10,
+    fontSize: 12,
     letterSpacing: 0.4,
   },
 
   registerButton: {
     width: '100%',
-    height: 34,
+    height: 40,
     backgroundColor: '#E64D57',
     borderRadius: 16,
     justifyContent: 'center',

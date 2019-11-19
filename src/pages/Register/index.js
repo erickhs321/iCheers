@@ -10,7 +10,7 @@ import {
 
 export default class Register extends React.Component {
   static navigationOptions = {
-    title: 'Register',
+    title: 'Cadastro',
     headerStyle: {
       backgroundColor: '#E64D57',
     },

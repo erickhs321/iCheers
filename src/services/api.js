@@ -13,7 +13,7 @@ export async function auth(email, password) {
         res = response.data;
       })
       .catch(error => {
-        res = { error };
+        res = { error: error.message };
       });
   }
   return res;

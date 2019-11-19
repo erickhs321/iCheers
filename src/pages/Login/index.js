@@ -28,7 +28,11 @@ export default class Login extends React.Component {
       } else {
         const res = await auth(this.state.email, this.state.password);
         if (res.error) {
-          throw 'Usuário ou senha incorretos';
+          if (res.error === 'Network Error') {
+            throw 'Você está desconectado da internet';
+          } else {
+            throw 'Usuário ou senha incorretos';
+          }
         } else {
           this.props.navigation.navigate('Home');
         }

@@ -27,7 +27,7 @@ export async function getChartData() {
       res = response.data;
     })
     .catch(error => {
-      res = { error };
+      res = { error: error.message };
     });
 
   return res;

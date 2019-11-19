@@ -1,12 +1,10 @@
 import { setUserToken } from '../services/async-storage';
+import axios from 'axios';
 
-export const login = async (username, password) => {
-  const userData = {
-    token: '6555149815',
-    name: 'Erick Henrique dos Santos',
-    email: 'erickhenrique321@gmail.com',
-    password: '12345',
-  };
-
-  setUserToken(JSON.stringify(userData.token));
-};
+export function Loggin(email, senha) {
+  axios.get(`https://icheersvk.appspot.com/Auth/${email}/${senha}`)
+    .then(res => {
+      console.log(res);
+    });
+  // setUserToken(JSON.stringify(.token));
+}

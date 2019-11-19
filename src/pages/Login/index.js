@@ -1,4 +1,5 @@
 import React from 'react';
+import { Loggin } from '../../services/api';
 import {
   StyleSheet,
   Text,
@@ -8,7 +9,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import { login } from '../../services/api';
 
 export default class Login extends React.Component {
   static navigationOptions = {
@@ -21,13 +21,9 @@ export default class Login extends React.Component {
   };
 
   login = async () => {
-    try {
-      const { user, password } = this.state;
-      await login(user, password);
-      this.props.navigation.navigate('Home');
-    } catch (error) {
-      console.log(error);
-    }
+    Loggin(this.state.user, this.state.password).then(
+      this.props.navigation.navigate('Home')
+    ).catch(console.log(error))
   };
 
   register = () => {

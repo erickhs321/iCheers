@@ -80,43 +80,47 @@ export default class Home extends React.Component {
         drawcrossline: '1',
         theme: 'fusion',
       },
-      categories: [
-        {
-          category: chartData.map(({ month }) => {
-            return {
-              label: month,
-            };
-          }),
-        },
-      ],
+      categories:
+        [
+          {
+            category: chartData.map(({ month }) => {
+              return {
+                label: month,
+              };
+            }),
+          },
+        ] || [],
       dataset: [
         {
           seriesname: 'Altura',
           plottooltext: 'Altura: $dataValuem',
-          data: chartData.map(({ height }) => {
-            return {
-              value: height,
-            };
-          }),
+          data:
+            chartData.map(({ height }) => {
+              return {
+                value: height,
+              };
+            }) || [],
         },
         {
           seriesname: 'Peso',
           plottooltext: 'Peso: $dataValuekg',
-          data: chartData.map(({ weight }) => {
-            return {
-              value: weight,
-            };
-          }),
+          data:
+            chartData.map(({ weight }) => {
+              return {
+                value: weight,
+              };
+            }) || [],
         },
         {
           seriesname: 'Imc',
           renderAs: 'line',
           plottooltext: 'Imc: $dataValue',
-          data: chartData.map(({ imc }) => {
-            return {
-              value: imc,
-            };
-          }),
+          data:
+            chartData.map(({ imc }) => {
+              return {
+                value: imc,
+              };
+            }) || [],
         },
       ],
     };

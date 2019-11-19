@@ -14,79 +14,7 @@ import Timeline from 'react-native-timeline-flatlist';
 import { Container, Title, Header, Content, Card, Body } from 'native-base';
 import FusionCharts from 'react-native-fusioncharts';
 import { Avatar } from 'react-native-paper';
-
-const dataSource = {
-  chart: {
-    caption: 'Informações sobre sua saúde',
-    scrollheight: '10',
-    numvisibleplot: '10',
-    drawcrossline: '1',
-    theme: 'fusion',
-  },
-  categories: [
-    {
-      category: [
-        {
-          label: 'Set',
-        },
-        {
-          label: 'Out',
-        },
-        {
-          label: 'Nov',
-        },
-      ],
-    },
-  ],
-  dataset: [
-    {
-      seriesname: 'Altura',
-      plottooltext: 'Altura: $dataValuem',
-      data: [
-        {
-          value: '1.72',
-        },
-        {
-          value: '1.72',
-        },
-        {
-          value: '1.72',
-        },
-      ],
-    },
-    {
-      seriesname: 'Peso',
-      plottooltext: 'Peso: $dataValuekg',
-      data: [
-        {
-          value: '60',
-        },
-        {
-          value: '65',
-        },
-        {
-          value: '70.5',
-        },
-      ],
-    },
-    {
-      seriesname: 'Imc',
-      renderAs: 'line',
-      plottooltext: 'Imc: $dataValue',
-      data: [
-        {
-          value: '18',
-        },
-        {
-          value: '20',
-        },
-        {
-          value: '22',
-        },
-      ],
-    },
-  ],
-};
+import { getChartData } from '../../services/api';
 
 export default class Home extends React.Component {
   static navigationOptions = {
@@ -98,11 +26,8 @@ export default class Home extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { dataSource };
-    console.log(this.state);
     this.state = {
-      ...this.state,
-      questions: ['Como você se sente hoje?'] || [],
+      questions: ['Como você se sente hoje?'],
       quizOpen: true,
     };
 
@@ -145,6 +70,59 @@ export default class Home extends React.Component {
     ];
   }
 
+  async componentDidMount() {
+    const chartData = await getChartData();
+    const dataSource = {
+      chart: {
+        caption: 'Informações sobre sua saúde',
+        scrollheight: '10',
+        numvisibleplot: '10',
+        drawcrossline: '1',
+        theme: 'fusion',
+      },
+      categories: [
+        {
+          category: chartData.map(({ month }) => {
+            return {
+              label: month,
+            };
+          }),
+        },
+      ],
+      dataset: [
+        {
+          seriesname: 'Altura',
+          plottooltext: 'Altura: $dataValuem',
+          data: chartData.map(({ height }) => {
+            return {
+              value: height,
+            };
+          }),
+        },
+        {
+          seriesname: 'Peso',
+          plottooltext: 'Peso: $dataValuekg',
+          data: chartData.map(({ weight }) => {
+            return {
+              value: weight,
+            };
+          }),
+        },
+        {
+          seriesname: 'Imc',
+          renderAs: 'line',
+          plottooltext: 'Imc: $dataValue',
+          data: chartData.map(({ imc }) => {
+            return {
+              value: imc,
+            };
+          }),
+        },
+      ],
+    };
+    this.setState({ ...this.state, dataSource });
+  }
+
   toggleQuiz = () => {
     this.setState({ quizOpen: false });
   };
@@ -152,7 +130,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <>
-        <Header androidStatusBarColor="#d13d46" style={{ height: 0 }}></Header>
+        <Header androidStatusBarColor="#d13d46" style={{ height: 0 }} />
 
         <Container
           style={{
@@ -236,6 +214,7 @@ export default class Home extends React.Component {
                 <FusionCharts
                   type="stackedcolumn2dline"
                   width={'100%'}
+                  dataFormat={'json'}
                   height={350}
                   dataSource={this.state.dataSource}
                   libraryPath={this.libraryPath}

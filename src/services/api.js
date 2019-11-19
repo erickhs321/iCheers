@@ -16,8 +16,19 @@ export async function auth(email, password) {
         res = { error };
       });
   }
+  return res;
+}
+
+export async function getChartData() {
+  let res;
+  await axios
+    .get(`${baseUrl}/dashboard/-LrMVlixWMlR10hb9Uzu`)
+    .then(response => {
+      res = response.data;
+    })
+    .catch(error => {
+      res = { error };
+    });
 
   return res;
-
-  // setUserToken(JSON.stringify(.token));
 }

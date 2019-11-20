@@ -17,7 +17,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import ImagePicker from 'react-native-image-picker';
 import { Body, Header, Title } from 'native-base';
-import { removeUserToken } from '../../services/async-storage';
+import { removeUserUid } from '../../services/async-storage';
 
 const options = {
   title: 'Selecionar foto',
@@ -49,7 +49,7 @@ export default class Configuration extends React.Component {
   };
 
   logout = () => {
-    removeUserToken();
+    removeUserUid();
     this.props.navigation.navigate('Login');
   };
 

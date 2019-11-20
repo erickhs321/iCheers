@@ -1,13 +1,13 @@
 import AsyncStorage from '@react-native-community/async-storage';
 
-export const setUserToken = async token => {
-  await AsyncStorage.setItem('token', token);
+export const setUserUid = async uid => {
+  await AsyncStorage.setItem('uid', uid);
 };
 
-export const getUserToken = async () => {
-  return await AsyncStorage.getItem('token');
+export const getUserUid = async () => {
+  return await AsyncStorage.getItem('uid');
 };
 
-export const removeUserToken = async () => {
-  return await AsyncStorage.removeItem('token');
+export const removeUserUid = async () => {
+  return await AsyncStorage.removeItem('uid');
 };

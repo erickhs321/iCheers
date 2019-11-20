@@ -1,5 +1,6 @@
 import React from 'react';
 import { auth } from '../../services/api';
+import { setUserUid } from '../../services/async-storage';
 import {
   StyleSheet,
   Text,
@@ -32,7 +33,6 @@ export default class Login extends React.Component {
           this.state.password,
         );
 
-        console.log(res);
         if (res.error) {
           if (res.error === 'Network Error') {
             throw 'Você está desconectado da internet';
@@ -41,6 +41,8 @@ export default class Login extends React.Component {
           }
         } else {
           this.props.navigation.navigate('Home');
+          const { uid } = res.user;
+          await setUserUid(uid);
         }
       }
     } catch (error) {

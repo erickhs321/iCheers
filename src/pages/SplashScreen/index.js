@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { Header } from 'native-base';
 
-import { getUserToken } from '../../services/async-storage';
+import { getUserUid } from '../../services/async-storage';
 
 export default class Login extends React.Component {
   componentDidMount() {
@@ -15,10 +15,10 @@ export default class Login extends React.Component {
   };
 
   initializer = async () => {
-    const token = await getUserToken();
+    const uid = await getUserUid();
 
     setTimeout(() => {
-      this.props.navigation.navigate(token ? 'Home' : 'Login');
+      this.props.navigation.navigate(uid ? 'Home' : 'Login');
     }, 3000);
   };
 

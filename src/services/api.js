@@ -1,28 +1,26 @@
-import { setUserToken } from '../services/async-storage';
+import { getUserUid } from '../services/async-storage';
 import axios from 'axios';
 
 const baseUrl = 'https://icheersvk.appspot.com';
 
-export async function auth(email, password) {
+export async function registerUser(email, password) {
   let res;
-  if (email && password) {
-    await axios
-      .get(`${baseUrl}/Auth/${email}/${password}`)
-      .then(response => {
-        setUserToken(response.data.Token);
-        res = response.data;
-      })
-      .catch(error => {
-        res = { error: error.message };
-      });
-  }
+  await axios
+    .post(`${baseUrl}/NovoUsuario/${email}/${password}`)
+    .then(response => {
+      res = response.data;
+    })
+    .catch(error => {
+      res = { error: error.message };
+    });
+
   return res;
 }
 
 export async function getChartData() {
   let res;
   await axios
-    .get(`${baseUrl}/dashboard/-LrMVlixWMlR10hb9Uzu`)
+    .get(`${baseUrl}/dashboard/turRVzVdc5OKh4NKiO8Z28mAUko1`)
     .then(response => {
       res = response.data;
     })

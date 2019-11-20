@@ -46,6 +46,10 @@ target 'iCheers' do
 
   pod 'RNPermissions', :path => '../node_modules/react-native-permissions'
 
+  pod 'rn-fetch-blob', :path => '../node_modules/rn-fetch-blob'
+
+  pod 'react-native-pdf', :path => '../node_modules/react-native-pdf'
+
   target 'iCheersTests' do
     inherit! :search_paths
     # Pods for testing

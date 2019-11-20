@@ -20,6 +20,9 @@ import Ocr from 'react-native-tesseract-ocr';
 import { Body, Header, Title, Fab, Icon, Button } from 'native-base';
 import { Searchbar } from 'react-native-paper';
 import ExamItem from '../../components/examItem';
+import { createStackNavigator } from 'react-navigation-stack';
+import Pdf from '../Pdf';
+import { createAppContainer } from 'react-navigation';
 
 const options = {
   title: 'Selecionar foto do exame',
@@ -46,22 +49,22 @@ export default class Exams extends React.Component {
           name: 'Exame toxicológico',
           place: 'Laboratório São Marcos',
           date: '25/05/2019',
+          path: require('../../files/exame.pdf'),
         },
         {
           id: '2',
           name: 'Exame de sangue',
           place: 'Laboratório São Marcos',
           date: '26/07/2018',
+          path: require('../../files/exame.pdf'),
         },
       ],
     };
   }
-
-  static navigationOptions = {
-    tabBarLabel: 'Exames',
-    tabBarIcon: ({ tintColor }) => (
-      <FontAwesomeIcon size={20} icon={faFileMedicalAlt} color={tintColor} />
-    ),
+  static navigationOptions = () => {
+    return {
+      header: () => null,
+    };
   };
 
   choosePhoto = () => {
@@ -92,6 +95,7 @@ export default class Exams extends React.Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <>
         <Header
@@ -119,6 +123,9 @@ export default class Exams extends React.Component {
                     name={item.name}
                     place={item.place}
                     date={item.date}
+                    navigate={() =>
+                      navigate('Pdf', { path: item.path, name: item.name })
+                    }
                   />
                 ))}
             </View>
@@ -236,3 +243,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+createAppContainer(
+  createStackNavigator({
+    Exams,
+    Pdf,
+  }),
+);

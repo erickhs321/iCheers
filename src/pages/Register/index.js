@@ -15,9 +15,6 @@ export default class Register extends React.Component {
       backgroundColor: '#E64D57',
     },
     headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontWeight: 'bold',
-    },
   };
 
   render() {

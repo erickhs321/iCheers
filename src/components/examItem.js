@@ -37,7 +37,7 @@ export default function ExamItem(props) {
               <Text style={styles.placeName}>{props.place}</Text>
             </View>
             <View style={styles.containerButton}>
-              <TouchableOpacity style={styles.button}>
+              <TouchableOpacity style={styles.button} onPress={props.navigate}>
                 <FontAwesomeIcon size={18} icon={faEye} color={'#fff'} />
                 <Text style={styles.buttonText}>Visualizar exame</Text>
               </TouchableOpacity>

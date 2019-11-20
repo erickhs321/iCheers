@@ -47,14 +47,20 @@ export default class Exams extends React.Component {
           name: 'Exame toxicológico',
           place: 'Laboratório São Marcos',
           date: '25/05/2019',
-          path: require('../../files/exame.pdf'),
+          path: {
+            uri:
+              'https://drive.google.com/uc?authuser=0&id=1CVu9UrePgHC3iHfKa2TDpUObLp3oky7p&export=download',
+          },
         },
         {
           id: '2',
           name: 'Exame de sangue',
           place: 'Laboratório São Marcos',
           date: '26/07/2018',
-          path: require('../../files/exame.pdf'),
+          path: {
+            uri:
+              'https://drive.google.com/uc?authuser=0&id=1CVu9UrePgHC3iHfKa2TDpUObLp3oky7p&export=download',
+          },
         },
       ],
     };

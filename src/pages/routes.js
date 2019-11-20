@@ -14,14 +14,11 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
 
+const viewPdf = createStackNavigator({ Exams, Pdf });
+
 const stackNavigation = createStackNavigator({
   Login,
   Register,
-});
-
-const viewPdf = createStackNavigator({
-  Exams,
-  Pdf,
 });
 
 viewPdf.navigationOptions = {
@@ -42,7 +39,6 @@ const tabsNavigator = createBottomTabNavigator(
   },
   {
     tabBarOptions: {
-      showIcon: true,
       activeTintColor: '#E64D57',
       inactiveTintColor: '#A4A6B3',
       style: {

@@ -1,18 +1,12 @@
 import React from 'react';
 import { StyleSheet, View, Text, Dimensions } from 'react-native';
 import Pdf from 'react-native-pdf';
-import { StackNavigator } from 'react-navigation';
-import Exams from '../Exams';
 
 export default class PdfPage extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const name = navigation.getParam('name');
     return {
       title: name,
-      headerStyle: {
-        backgroundColor: '#E64D57',
-      },
-      headerTintColor: '#fff',
     };
   };
 

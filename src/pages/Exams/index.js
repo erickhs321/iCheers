@@ -21,8 +21,6 @@ import { Body, Header, Title, Fab, Icon, Button } from 'native-base';
 import { Searchbar } from 'react-native-paper';
 import ExamItem from '../../components/examItem';
 import { createStackNavigator } from 'react-navigation-stack';
-import Pdf from '../Pdf';
-import { createAppContainer } from 'react-navigation';
 
 const options = {
   title: 'Selecionar foto do exame',
@@ -96,6 +94,7 @@ export default class Exams extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
+
     return (
       <>
         <Header
@@ -129,12 +128,6 @@ export default class Exams extends React.Component {
                   />
                 ))}
             </View>
-
-            {/* <Image
-              source={this.state.avatarSource}
-              style={{ width: 200, height: 200, margin: 10, padding: 10 }}
-            />
-            <Text style>{this.state.text}</Text> */}
           </View>
         </ScrollView>
         <Fab
@@ -154,16 +147,6 @@ export default class Exams extends React.Component {
             <FontAwesomeIcon size={20} icon={faSyringe} color={'#fff'} />
           </Button>
         </Fab>
-        {/* <TouchableOpacity
-          onPress={this.choosePhoto}
-          style={styles.registerExamButton}>
-          <FontAwesomeIcon
-            size={20}
-            icon={faPlus}
-            color={'white'}
-            style={styles.iconMargin}
-          />
-        </TouchableOpacity> */}
       </>
     );
   }
@@ -243,10 +226,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-createAppContainer(
-  createStackNavigator({
-    Exams,
-    Pdf,
-  }),
-);

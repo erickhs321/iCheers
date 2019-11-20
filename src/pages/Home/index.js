@@ -71,7 +71,27 @@ export default class Home extends React.Component {
   }
 
   async componentDidMount() {
-    const chartData = await getChartData();
+    const chartData = [
+      {
+        height: 1.72,
+        imc: 20.3,
+        month: 'set',
+        weight: 60,
+      },
+      {
+        height: 1.72,
+        imc: 22,
+        month: 'out',
+        weight: 65,
+      },
+      {
+        height: 1.72,
+        imc: 27,
+        month: 'nov',
+        weight: 80,
+      },
+    ];
+
     const dataSource = {
       chart: {
         caption: 'Informações sobre sua saúde',

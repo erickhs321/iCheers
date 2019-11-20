@@ -50,6 +50,8 @@ target 'iCheers' do
 
   pod 'react-native-pdf', :path => '../node_modules/react-native-pdf'
 
+  pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
+
   target 'iCheersTests' do
     inherit! :search_paths
     # Pods for testing

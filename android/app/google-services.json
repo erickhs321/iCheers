@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1032533202698",
+    "firebase_url": "https://projetoihealth-3685e.firebaseio.com",
+    "project_id": "projetoihealth-3685e",
+    "storage_bucket": "projetoihealth-3685e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032533202698:android:e3cbb77ceddcb2196e0cf3",
+        "android_client_info": {
+          "package_name": "com.icheers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1032533202698-54vi1c4r2eb2qjkppci5og9jftlfmsir.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6yXc-9UDi9aCOJ2aJf2tND0JpZb5OQMI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1032533202698-54vi1c4r2eb2qjkppci5og9jftlfmsir.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -22,6 +22,7 @@
     "react-native": "0.61.1",
     "react-native-camera": "^3.8.0",
     "react-native-chart-kit": "^3.11.0",
+    "react-native-firebase": "^5.5.6",
     "react-native-fusioncharts": "^4.1.1",
     "react-native-gesture-handler": "^1.5.0",
     "react-native-image-picker": "^1.1.0",

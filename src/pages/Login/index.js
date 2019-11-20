@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import { authWithEmailAndPassword } from '../../services/firebase';
 export default class Login extends React.Component {
   static navigationOptions = () => {
     return {
@@ -26,7 +27,12 @@ export default class Login extends React.Component {
       if (!this.state.email || !this.state.password) {
         throw 'Insira todos os dados';
       } else {
-        const res = await auth(this.state.email, this.state.password);
+        const res = await authWithEmailAndPassword(
+          this.state.email,
+          this.state.password,
+        );
+
+        console.log(res);
         if (res.error) {
           if (res.error === 'Network Error') {
             throw 'Você está desconectado da internet';

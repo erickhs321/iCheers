@@ -122,6 +122,15 @@ def enableHermes = project.ext.react.get("enableHermes", false);
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
+ext {
+    buildToolsVersion = "27.0.3"
+    minSdkVersion = 16
+    compileSdkVersion = 27
+    targetSdkVersion = 26
+    supportLibVersion = "27.1.1"
+    googlePlayServicesVersion = "15.0.1"
+    androidMapsUtilsVersion = "0.5+"
+}
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -189,6 +198,8 @@ android {
 }
 
 dependencies {
+    implementation project(':@react-native-community_geolocation')
+    implementation project(':react-native-maps')
     implementation "com.google.firebase:firebase-core:16.0.9"
     implementation "com.google.firebase:firebase-auth:17.0.0"
     implementation 'com.android.support:multidex:1.0.3'

@@ -2,7 +2,11 @@ import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { Header } from 'native-base';
 
-import { getUserUid } from '../../services/async-storage';
+import { getChartData } from '../../services/api';
+import {
+  getItemAsyncStorage,
+  saveItemAsyncStorage,
+} from '../../services/async-storage';
 
 export default class Login extends React.Component {
   componentDidMount() {
@@ -15,11 +19,15 @@ export default class Login extends React.Component {
   };
 
   initializer = async () => {
-    const uid = await getUserUid();
+    const uid = await getItemAsyncStorage('uid');
 
-    setTimeout(() => {
-      this.props.navigation.navigate(uid ? 'Home' : 'Login');
-    }, 3000);
+    const chartData = await getChartData();
+
+    if (uid) {
+      this.props.navigation.navigate('Home', { chartData });
+    } else {
+      this.props.navigation.navigate('Login');
+    }
   };
 
   render() {

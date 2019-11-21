@@ -71,26 +71,7 @@ export default class Home extends React.Component {
   }
 
   async componentDidMount() {
-    const chartData = [
-      {
-        height: 1.72,
-        imc: 20.3,
-        month: 'set',
-        weight: 60,
-      },
-      {
-        height: 1.72,
-        imc: 22,
-        month: 'out',
-        weight: 65,
-      },
-      {
-        height: 1.72,
-        imc: 27,
-        month: 'nov',
-        weight: 80,
-      },
-    ];
+    const chartData = this.props.navigation.getParam('chartData');
 
     const dataSource = {
       chart: {

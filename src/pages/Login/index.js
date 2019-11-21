@@ -1,6 +1,6 @@
 import React from 'react';
 import { auth } from '../../services/api';
-import { setUserUid } from '../../services/async-storage';
+import { saveItemAsyncStorage } from '../../services/async-storage';
 import {
   StyleSheet,
   Text,
@@ -42,7 +42,7 @@ export default class Login extends React.Component {
         } else {
           this.props.navigation.navigate('Home');
           const { uid } = res.user;
-          await setUserUid(uid);
+          await saveItemAsyncStorage('uid', uid);
         }
       }
     } catch (error) {

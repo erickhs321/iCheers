@@ -20,7 +20,21 @@ export async function registerUser(email, password) {
 export async function getChartData() {
   let res;
   await axios
-    .get(`${baseUrl}/dashboard/turRVzVdc5OKh4NKiO8Z28mAUko1`)
+    .get(`${baseUrl}/dashboard/eug19UhWg7hYGqbxOkgj3tdks6p2`)
+    .then(response => {
+      res = response.data;
+    })
+    .catch(error => {
+      res = { error: error.message };
+    });
+
+  return res;
+}
+
+export async function getPartnersData() {
+  let res;
+  await axios
+    .get(`${baseUrl}/Parceiros/eug19UhWg7hYGqbxOkgj3tdks6p2`)
     .then(response => {
       res = response.data;
     })

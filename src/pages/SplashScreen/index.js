@@ -3,14 +3,11 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import { Header } from 'native-base';
 
 import { getChartData } from '../../services/api';
-import {
-  getItemAsyncStorage,
-  saveItemAsyncStorage,
-} from '../../services/async-storage';
+import { getItemAsyncStorage } from '../../services/async-storage';
 
 export default class Login extends React.Component {
-  componentDidMount() {
-    this.initializer();
+  async componentDidMount() {
+    await this.initializer();
   }
 
   state = {
@@ -21,9 +18,8 @@ export default class Login extends React.Component {
   initializer = async () => {
     const uid = await getItemAsyncStorage('uid');
 
-    const chartData = await getChartData();
-
     if (uid) {
+      const chartData = await getChartData();
       this.props.navigation.navigate('Home', { chartData });
     } else {
       this.props.navigation.navigate('Login');

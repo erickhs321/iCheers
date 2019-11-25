@@ -48,8 +48,8 @@ export default class Configuration extends React.Component {
     ),
   };
 
-  logout = () => {
-    removeItemAsyncStorage('uid');
+  logout = async () => {
+    await removeItemAsyncStorage('uid');
     this.props.navigation.navigate('Login');
   };
 

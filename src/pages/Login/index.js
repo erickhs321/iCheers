@@ -40,9 +40,9 @@ export default class Login extends React.Component {
             throw 'Usuário ou senha incorretos';
           }
         } else {
-          this.props.navigation.navigate('Home');
           const { uid } = res.user;
           await saveItemAsyncStorage('uid', uid);
+          this.props.navigation.navigate('SplashScreen');
         }
       }
     } catch (error) {

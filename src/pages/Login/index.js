@@ -35,6 +35,7 @@ export default class Login extends React.Component {
         );
 
         if (res.error) {
+          this.setState({ ...this.state, isLoading: false });
           if (res.error === 'Network Error') {
             throw 'Você está desconectado da internet';
           } else {
@@ -43,7 +44,7 @@ export default class Login extends React.Component {
         } else {
           const { uid } = res.user;
           await saveItemAsyncStorage('uid', uid);
-          this.state.isLoading = false;
+          this.setState({ ...this.state, isLoading: false });
           this.props.navigation.navigate('SplashScreen');
         }
       }

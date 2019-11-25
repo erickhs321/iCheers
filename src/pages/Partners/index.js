@@ -70,25 +70,23 @@ export default class Configuration extends React.Component {
                 const { Nome } = partner;
                 const { latitude, longitude } = partner.Coordenadas;
                 return (
-                  <>
-                    <Marker
-                      coordinate={{ latitude, longitude }}
-                      style={{ alignItems: 'center' }}>
-                      <FontAwesomeIcon
-                        size={30}
-                        icon={faMapMarkerAlt}
-                        color={'#E64D57'}
-                      />
-                      <Text
-                        style={{
-                          color: '#E64D57',
-                          marginLeft: 5,
-                          fontWeight: 'bold',
-                        }}>
-                        {Nome}
-                      </Text>
-                    </Marker>
-                  </>
+                  <Marker
+                    coordinate={{ latitude, longitude }}
+                    style={{ alignItems: 'center' }}>
+                    <FontAwesomeIcon
+                      size={30}
+                      icon={faMapMarkerAlt}
+                      color={'#E64D57'}
+                    />
+                    <Text
+                      style={{
+                        color: '#E64D57',
+                        marginLeft: 5,
+                        fontWeight: 'bold',
+                      }}>
+                      {Nome}
+                    </Text>
+                  </Marker>
                 );
               })}
             </MapView>

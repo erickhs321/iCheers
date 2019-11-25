@@ -14,7 +14,6 @@ import Timeline from 'react-native-timeline-flatlist';
 import { Container, Title, Header, Content, Card, Body } from 'native-base';
 import FusionCharts from 'react-native-fusioncharts';
 import { Avatar } from 'react-native-paper';
-import { getChartData } from '../../services/api';
 
 export default class Home extends React.Component {
   static navigationOptions = {
@@ -34,45 +33,38 @@ export default class Home extends React.Component {
     this.libraryPath = Platform.select({
       android: { uri: 'file:///android_asset/fusioncharts.html' },
     });
+  }
 
-    this.data = [
-      {
-        time: '18/11/2018',
-        title: 'Motivo',
-        icon: require('../../assets/qsad.png'),
-        description: 'Bati com meu dedinho na quina da mesa',
-      },
-      {
-        time: '19/11/2018',
-        title: 'Motivo',
-        description: 'Hoje o dia foi muito agradável.',
-        icon: require('../../assets/qhappy1.png'),
-      },
-      {
-        time: '20/11/2018',
-        title: 'Motivo',
-        description: 'O dia foi normal',
-        icon: require('../../assets/qnormal.png'),
-      },
-      {
-        time: '21/11/2018',
-        title: 'Motivo',
-        description: 'Motivo não informado',
+  mapIcon(name) {
+    switch (name) {
+      case 'qsad':
+        return require('../../assets/qsad.png');
 
-        icon: require('../../assets/qsad.png'),
-      },
-      {
-        time: '22/11/2018',
-        title: 'Motivo',
-        description: 'O dia foi produtivo',
-        icon: require('../../assets/qhappy.png'),
-      },
-    ];
+      case 'qsad1':
+        return require('../../assets/qsad1.png');
+
+      case 'qhappy':
+        return require('../../assets/qhappy.png');
+
+      case 'qhappy1':
+        return require('../../assets/qhappy1.png');
+
+      case 'qnormal':
+        return require('../../assets/qnormal.png');
+    }
   }
 
   async componentDidMount() {
-    const chartData = this.props.navigation.getParam('chartData');
-
+    const humorData = this.props.navigation.getParam('humorData');
+    this.humorData = humorData.map(({ time, title, description, icon }) => {
+      return {
+        time,
+        title,
+        description,
+        icon: this.mapIcon(icon),
+      };
+    });
+    const imcData = this.props.navigation.getParam('imcData');
     const dataSource = {
       chart: {
         caption: 'Informações sobre sua saúde',
@@ -84,7 +76,7 @@ export default class Home extends React.Component {
       categories:
         [
           {
-            category: chartData.map(({ month }) => {
+            category: imcData.map(({ month }) => {
               return {
                 label: month,
               };
@@ -96,7 +88,7 @@ export default class Home extends React.Component {
           seriesname: 'Altura',
           plottooltext: 'Altura: $dataValuem',
           data:
-            chartData.map(({ height }) => {
+            imcData.map(({ height }) => {
               return {
                 value: height,
               };
@@ -106,7 +98,7 @@ export default class Home extends React.Component {
           seriesname: 'Peso',
           plottooltext: 'Peso: $dataValuekg',
           data:
-            chartData.map(({ weight }) => {
+            imcData.map(({ weight }) => {
               return {
                 value: weight,
               };
@@ -117,7 +109,7 @@ export default class Home extends React.Component {
           renderAs: 'line',
           plottooltext: 'Imc: $dataValue',
           data:
-            chartData.map(({ imc }) => {
+            imcData.map(({ imc }) => {
               return {
                 value: imc,
               };
@@ -193,7 +185,7 @@ export default class Home extends React.Component {
                 </Text>
                 <Timeline
                   columnFormat="two-column"
-                  data={this.data}
+                  data={this.humorData}
                   circleSize={30}
                   circleColor="#fff"
                   lineColor="#00b386"

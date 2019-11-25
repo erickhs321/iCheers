@@ -19,8 +19,8 @@ export default class Login extends React.Component {
     const uid = await getItemAsyncStorage('uid');
 
     if (uid) {
-      const chartData = await getChartData();
-      this.props.navigation.navigate('Home', { chartData });
+      const { humorData, imcData } = await getChartData();
+      this.props.navigation.navigate('Home', { imcData, humorData });
     } else {
       this.props.navigation.navigate('Login');
     }

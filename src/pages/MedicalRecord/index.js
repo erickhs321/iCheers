@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Dimensions } from 'react-native';
+import { StyleSheet, View, Image, Dimensions } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faNotesMedical } from '@fortawesome/free-solid-svg-icons';
 import { Body, Header, Title, Fab, Icon, Button } from 'native-base';
@@ -68,7 +68,10 @@ export default class MedicalRecord extends React.Component {
                 <Title>Prontuário</Title>
               </Body>
             </Header>
-            <Text>{this.state.id}</Text>
+            <View style={{ justifyContent: 'center', alignItems: 'center', height: '85%' }}>
+              <Image style={{ borderRadius: 4 }} source={require('../../assets/gambiarra.png')} />
+            </View>
+
           </View>
         )}
         {this.state.focusedScreen && !this.state.readQrCode && (

@@ -1,5 +1,4 @@
 import React from 'react';
-import { auth } from '../../services/api';
 import { saveItemAsyncStorage } from '../../services/async-storage';
 import {
   StyleSheet,
@@ -9,6 +8,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
+import { Spinner } from 'native-base';
 
 import { authWithEmailAndPassword } from '../../services/firebase';
 export default class Login extends React.Component {
@@ -28,6 +28,7 @@ export default class Login extends React.Component {
       if (!this.state.email || !this.state.password) {
         throw 'Insira todos os dados';
       } else {
+        this.setState({ ...this.state, isLoading: true });
         const res = await authWithEmailAndPassword(
           this.state.email,
           this.state.password,
@@ -42,6 +43,7 @@ export default class Login extends React.Component {
         } else {
           const { uid } = res.user;
           await saveItemAsyncStorage('uid', uid);
+          this.state.isLoading = false;
           this.props.navigation.navigate('SplashScreen');
         }
       }
@@ -85,7 +87,13 @@ export default class Login extends React.Component {
         />
 
         <View style={styles.loginButtonContainer}>
-          <TouchableOpacity style={styles.loginButton} onPress={this.login}>
+          <TouchableOpacity
+            style={styles.loginButton}
+            disabled={this.state.isLoading}
+            onPress={this.login}>
+            {this.state.isLoading && (
+              <Spinner color="#fff" style={{ marginRight: 5 }} />
+            )}
             <Text style={styles.buttonText}>Entrar</Text>
           </TouchableOpacity>
         </View>
@@ -159,6 +167,7 @@ const styles = StyleSheet.create({
   },
 
   loginButton: {
+    flexDirection: 'row',
     width: '100%',
     height: 45,
     fontSize: 13,

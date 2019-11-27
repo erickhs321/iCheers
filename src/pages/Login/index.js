@@ -8,7 +8,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import { Spinner } from 'native-base';
+import { Spinner, Header } from 'native-base';
 
 import { authWithEmailAndPassword } from '../../services/firebase';
 export default class Login extends React.Component {
@@ -59,54 +59,59 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        {this.state.error && (
-          <View style={styles.errorAlert}>
-            <Text style={styles.errorAlertText}>{this.state.error}</Text>
+      <>
+        <Header androidStatusBarColor="#d13d46" style={{ height: 0 }} />
+        <View style={styles.container}>
+          {this.state.error && (
+            <View style={styles.errorAlert}>
+              <Text style={styles.errorAlertText}>{this.state.error}</Text>
+            </View>
+          )}
+
+          <View style={styles.logoContainer}>
+            <Image source={require('../../assets/logo.png')} />
+            <Text style={styles.title}>iCheers</Text>
           </View>
-        )}
 
-        <View style={styles.logoContainer}>
-          <Image source={require('../../assets/logo.png')} />
-          <Text style={styles.title}>iCheers</Text>
-        </View>
+          <TextInput
+            style={styles.input}
+            onChangeText={email => this.setState({ email })}
+            value={this.state.email}
+            placeholder="Login"
+            placeholderTextColor="#363740"
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Senha"
+            onChangeText={password => this.setState({ password })}
+            value={this.state.password}
+            placeholderTextColor="#363740"
+            secureTextEntry={true}
+          />
 
-        <TextInput
-          style={styles.input}
-          onChangeText={email => this.setState({ email })}
-          value={this.state.email}
-          placeholder="Login"
-          placeholderTextColor="#363740"
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Senha"
-          onChangeText={password => this.setState({ password })}
-          value={this.state.password}
-          placeholderTextColor="#363740"
-          secureTextEntry={true}
-        />
-
-        <View style={styles.loginButtonContainer}>
+          <View style={styles.loginButtonContainer}>
+            <TouchableOpacity
+              style={styles.loginButton}
+              disabled={this.state.isLoading}
+              onPress={this.login}>
+              {this.state.isLoading && (
+                <Spinner color="#fff" style={{ marginRight: 5 }} />
+              )}
+              <Text style={styles.buttonText}>Entrar</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.forgotPasswordContainer}>
+            <TouchableOpacity>
+              <Text style={styles.forgotPasswordText}>Esqueci minha senha</Text>
+            </TouchableOpacity>
+          </View>
           <TouchableOpacity
-            style={styles.loginButton}
-            disabled={this.state.isLoading}
-            onPress={this.login}>
-            {this.state.isLoading && (
-              <Spinner color="#fff" style={{ marginRight: 5 }} />
-            )}
-            <Text style={styles.buttonText}>Entrar</Text>
+            style={styles.registerButton}
+            onPress={this.register}>
+            <Text style={styles.buttonText}>Não possuo um cadastro</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.forgotPasswordContainer}>
-          <TouchableOpacity>
-            <Text style={styles.forgotPasswordText}>Esqueci minha senha</Text>
-          </TouchableOpacity>
-        </View>
-        <TouchableOpacity style={styles.registerButton} onPress={this.register}>
-          <Text style={styles.buttonText}>Não possuo um cadastro</Text>
-        </TouchableOpacity>
-      </View>
+      </>
     );
   }
 }
